@@ -9,11 +9,13 @@ function App() {
     <div className="App">
       <Router>
           <div><Header /></div>
-          {/* <div>
-            <MainPages />
+          <div className='main'>
+            
 
-          </div> */}
-          <div> </div>
+          </div>
+          <div>
+          <Footer/>  
+          </div>
         </Router>
     </div>
   );
