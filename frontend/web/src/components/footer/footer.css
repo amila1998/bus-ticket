@@ -5,7 +5,7 @@ footer {
   position: relative;
   bottom: 0;
   left: 0;
-  background: var(--white);
+  background: var(--purple);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -20,8 +20,10 @@ footer .content {
 
 footer .content p,
 a {
-  color: var(--black);
+  color: var(--white);
 }
+
+
 
 footer .content .box {
   width: 33%;
@@ -31,7 +33,7 @@ footer .content .box {
 footer .content .topic {
   font-size: 16px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: var(--black);
+  color: var(--white);
   margin-bottom: 16px;
 
 }
@@ -116,7 +118,7 @@ footer .content .media-icons a {
 
 
 .content .media-icons a:hover {
-  border-color: var(--blue);
+  text-shadow: 1px 1px var(--black) !important;
 }
 
 footer .bottom {

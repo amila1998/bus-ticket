@@ -1,13 +1,13 @@
 import './header.css'
-
+import logo from  '../../assets/mainLogo.png'
 const Header = () => {
 
     return (
         <div><nav className="navbar navbar-expand-lg fixed-top navbar-light bg-color">
             <div className="container-fluid">
                 <a className="navbar-brand ms-5" >
-                    {/* <img src={logo} alt="" width="155" height="50" /> */}
-                    <h4>Sri Lanka <br />Public Transport Ticketing System</h4>
+                    <img src={logo} alt="" width="155" height="50" />
+                    {/* <h4>Sri Lanka <br />Public Transport Ticketing System</h4> */}
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

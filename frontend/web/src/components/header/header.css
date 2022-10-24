@@ -9,7 +9,7 @@
 }
 
 .navbar-nav .nav-link {
-    color: var(--black) !important;
+    color: var(--white) !important;
     font-weight: 700;
 }
 
@@ -24,4 +24,8 @@
     line-height: 43px;
     border-radius: 100px;
     align-items: center;
+}
+
+.navbar-brand:hover{
+    cursor: pointer;
 }
