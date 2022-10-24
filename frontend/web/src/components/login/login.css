@@ -1,0 +1,21 @@
+.layout {
+    padding: 20px;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    width: 80%;
+    height: 100%;
+}
+
+
+.rowflex {
+    display: flex;
+}
+
+.icons {
+    padding: 10px;
+    float: right;
+    margin-left: -40px;
+    position: relative;
+    z-index: 2;
+}
