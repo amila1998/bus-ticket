@@ -18,11 +18,7 @@ const Footer = () => {
 
           </div>
           <div class="middle box">
-            <div class="topic">Subscribe us</div>
-            <form >
-              <input type="text" placeholder="Enter email address" />
-              <input type="submit" name="" value="Send" />
-            </form>
+            
           </div>
           <div class="right box">
             <div class="topic">Follow us</div>

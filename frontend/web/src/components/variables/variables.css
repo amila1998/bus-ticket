@@ -4,7 +4,7 @@
     --purple:rgb(173,127,251);
     --slide: rgb(207,208,238);
     --slideB: rgb(184,187,232);
-    --GradientBG: linear-gradient(to left, var(--slide), var(--boarderColor));
+    --GradientBG: linear-gradient(to left, var(--slide), var(--slideB));
     --white: rgb(255, 255, 255);
     --black: black;
     --gray: rgb(100, 134, 155, 1);
