@@ -20,7 +20,7 @@ const Header = () => {
                     <div className="d-flex">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item me-5">
-                                <a className="nav-link" aria-current="page " href="#">Home</a>
+                                <a className="nav-link" aria-current="page " href="/">Home</a>
                             </li>
                             <li className="nav-item me-5">
                                 <a className="nav-link linkColor" href="#">About Us</a>
