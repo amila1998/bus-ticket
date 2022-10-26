@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
 }
 
 .App-logo {
@@ -47,4 +47,73 @@
     margin-top: 150px;
     margin-bottom: 20px;
   }
+}
+
+.inputs {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  color: var(--black);
+  background: none;
+  border-radius: 15px;
+  padding-left: 10px;
+  font-size: 12px;
+  border: 2px solid var(--lightBlue);
+  font-size: 16px;
+
+}
+
+.inputs2{
+  width: 100%;
+  outline: none;
+  color: var(--black);
+  background: none;
+  padding-left: 10px;
+  font-size: 12px;
+  border: 2px solid var(--lightBlue);
+  font-size: 16px;
+}
+
+.bodyLink {
+  color: var(--black);
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.bodyLink:hover {
+  color: var(--pink);
+}
+
+.btnPink {
+  overflow: hidden;
+  height: 42px;
+  width: 30%;
+  font-size: 18px;
+  color: var(--white);
+  background: var(--pink);
+  outline: none;
+  border-radius: 20px;
+  border-color: var(--white);
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  min-width: fit-content;
+}
+
+.form {
+  width: 50%;
+  background-color: var(--white);
+  height: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  min-width: 300px;
+  /* justify-content: center;
+  text-align: center; */
+}
+
+.label {
+  font-weight:500;
+  font-size: 18px;
+  margin-top: 7px;
 }
