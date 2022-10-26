@@ -3,7 +3,7 @@
     margin: auto;
     justify-content: center;
     display: flex;
-    width: 80%;
+    width: 100%;
     height: 100%;
 }
 
@@ -20,3 +20,44 @@
     z-index: 2;
 }
 
+.form {
+    width: 50%;
+    background-color: var(--white);
+    height: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    min-width: 300px;
+    /* justify-content: center;
+    text-align: center; */
+}
+
+.PhoneInput {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    color: var(--black);
+    background: none;
+    border-radius: 15px;
+    padding-left: 10px;
+    font-size: 12px;
+    border: 2px solid var(--lightBlue);
+    font-size: 16px;
+}
+
+.PhoneInput input {
+    border: none;
+    outline: none;
+}
+
+.PhoneInput input:focus {
+    border: none !important;
+    outline: none;
+}
+
+.warningNoToken{
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(250, 225, 0);
+    margin-bottom: 20px;
+}
