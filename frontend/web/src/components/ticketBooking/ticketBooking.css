@@ -1,0 +1,55 @@
+.Qbody{
+    width: 100%;
+    margin-top: 10px;
+    display: block;
+  }
+
+  .QBottom{
+    width: 100%;
+    display: flex;
+    overflow: auto;
+  }
+  
+  .Qleft{
+    text-align: left;
+  }
+  
+  .Qrow{
+  
+    display: flex;
+  }
+  .Qcenter{
+    align-items: center;
+    text-align: center;
+  
+  }
+  
+  .Qrow input{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  .QBottomL{
+    margin-left: auto;
+    overflow: hidden;
+    width: 35% !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    padding: 35px !important;
+    margin-bottom: 10px;
+    border-radius: 20px !important;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: inline-table;
+  }
+  
+  .QBottomR{
+    margin-right: auto;
+    overflow: hidden;
+    width: 45% !important;
+    margin-left: 50px;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    padding: 35px;
+    border-radius: 20px !important;
+    margin-bottom: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  
