@@ -5,7 +5,7 @@ import Login from './login/Login';
 const MainPages = () => {
 
     return (
-        <div className='main'> 
+        <div> 
         <Routes>
 
         <Route path='/signin' element={<Login />} />
