@@ -10,25 +10,6 @@
     overflow: auto;
   }
   
-  .Qleft{
-    text-align: left;
-  }
-  
-  .Qrow{
-  
-    display: flex;
-  }
-  .Qcenter{
-    align-items: center;
-    text-align: center;
-  
-  }
-  
-  .Qrow input{
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-  
   .QBottomL{
     margin-left: auto;
     overflow: hidden;
@@ -51,5 +32,14 @@
     border-radius: 20px !important;
     margin-bottom: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  .radioButton {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .align {
+    text-align: right !important;
   }
   
