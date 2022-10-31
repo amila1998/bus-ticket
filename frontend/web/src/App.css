@@ -1,5 +1,5 @@
 .App {
-  /* text-align: center; */
+
 }
 
 .App-logo {
@@ -40,6 +40,8 @@
 .main{
   margin-top: 100px;
   margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 @media screen and (max-width: 992px) {
@@ -100,17 +102,7 @@
   min-width: fit-content;
 }
 
-.form {
-  width: 50%;
-  background-color: var(--white);
-  height: 100%;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-  min-width: 300px;
-  /* justify-content: center;
-  text-align: center; */
-}
+
 
 .label {
   font-weight:500;

@@ -1,0 +1,28 @@
+.userMTopbar{
+    border: 2px solid var(--purple);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: space-between;
+
+}
+
+.userMTopbarrow{
+    margin-left: 10px;
+    margin-right: 10px ;
+}
+
+.userMFlex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.table2{
+    overflow-x: scroll !important;
+    width: 100%;
+}
+
+.adminMain{
+    width: 100%;
+}
