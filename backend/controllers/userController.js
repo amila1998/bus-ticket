@@ -49,11 +49,11 @@ const userController = {
                         .json({ message: "Please enter your passport number" });
             }
 
-            if (!tokenID) {
-                return res
-                    .status(400)
-                    .json({ message: "There should be a your token number" });
-            }
+            // if (!tokenID) {
+            //     return res
+            //         .status(400)
+            //         .json({ message: "There should be a your token number" });
+            // }
 
             // hash password
             const salt = await bcrypt.genSalt();
@@ -138,7 +138,7 @@ const userController = {
             const user = await User.findById(req.user.id).select('-password')
             if (!user) return res.status(400).json({ msg: "User does not exist." })
 
-            res.json(user)
+            res.status(200).json(user)
         } catch (err) {
             return res.status(500).json({ msg: err.message })
         }
@@ -148,6 +148,15 @@ const userController = {
         const token = createToken.access({id: 'asdjkasdasdhashdkasd' });
         res.status(200).json({ msg: "Signout success" });
     },
+    getAllUsers:async (req, res) =>{
+        try {
+            const users = await User.find().select('-password')
+            res.status(200).json(users)
+        } catch (error) {
+            console.log("🚀 ~ file: userController.js ~ line 155 ~ getAllUser: ~ error", error)
+            return res.status(500).json({ msg: err.message })
+        }
+    }
 
 }
 
