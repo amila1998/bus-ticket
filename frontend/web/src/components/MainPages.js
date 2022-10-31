@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
+import BusTimeTable from './busTimeTable/BusTimeTable';
 import { GlobalState } from '../GlobalState';
 import AdminHome from './admin/AdminHome';
 import ForgotPassword from './forgotPassword/ForgotPassword';
@@ -26,6 +27,8 @@ const MainPages = () => {
         <Route path='/signin' element={<Login />} />
         <Route path='/forgotPassword' element={<ForgotPassword />} />
         <Route path='/resetPassword' element={<ResetPassword/>} />
+        
+        <Route path='/busTimeTable' element={<BusTimeTable/>} />
         <Route path='/signup' element={<Register/>} />
         <Route path='/ticketBooking' element={<TicketBooking/>} />
         
