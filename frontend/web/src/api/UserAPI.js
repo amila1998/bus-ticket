@@ -35,7 +35,6 @@ function UserAPI(token) {
                         setIsf_passanger(false)
                         setIstransport_manager(false)
                     }
-
                     setuserName(res.data.name)
                     setUserPhoto(res.data.logo)
                     setUser(res.data)

@@ -36,6 +36,8 @@ app.get('/', (req, res) => {
   });
   const userRoutes = require("./routes/userRoutes");
   app.use(userRoutes);
+  const tokenRoutes = require("./routes/tokenRoute");
+  app.use(tokenRoutes);
   
 
 if (process.env.NODE_ENV === 'production') {
