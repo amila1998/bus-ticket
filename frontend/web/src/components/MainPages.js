@@ -1,5 +1,8 @@
 import React, { useContext } from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
+import AddBusRoute from './busRoute/AddBusRoute';
+import BusRoute from './busRoute/BusRoute';
+import EditBusRoute from './busRoute/EditBusRoute';
 import BusTimeTable from './busTimeTable/BusTimeTable';
 import { GlobalState } from '../GlobalState';
 import AdminHome from './admin/AdminHome';
@@ -31,6 +34,9 @@ const MainPages = () => {
         <Route path='/busTimeTable' element={<BusTimeTable/>} />
         <Route path='/signup' element={<Register/>} />
         <Route path='/ticketBooking' element={<TicketBooking/>} />
+        <Route path='/busRoute' element={<BusRoute/>}/>
+        <Route path='/addBusRoute' element={<AddBusRoute/>}/>
+        <Route path='/editBusRoute' element={<EditBusRoute/>}/>
         
 
         <Route path='/userManagement' element={isAdmin?<UserManagement/>:istransport_manager&&<UserManagement/>} />

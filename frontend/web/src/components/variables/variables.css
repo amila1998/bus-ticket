@@ -20,6 +20,8 @@
     --green: rgb(63, 158, 26);
     --select: rgb(65, 151, 204);
     --selecthover:rgb(63, 177, 248);
+    --newPuple:rgb(43,49,90);
+
     --PhoneInputCountrySelectArrow-color:var(--pink) !important;
     --PhoneInput-color--focus:disabled !important;
 }
