@@ -1,0 +1,62 @@
+.adminDashboard{
+    display: block;
+    width: 90%;
+    justify-content: center;
+    margin: auto;
+    background-color: var(--slideB);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.title{
+    color: var(--black);
+    font-family: Franklin Gothic Medium;
+    font-size: 32px;
+    text-align: center;
+}
+
+.adminMain{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.adminmainL{
+    justify-content: center;
+    margin: auto;
+    width:49%;
+    padding: 5px;
+    display: table;
+}
+
+.adminmainR{
+    justify-content: center;
+    margin: auto;
+    width:49%;
+    padding: 5px;
+    align-items: center;
+    display: block;
+
+}
+
+
+@media screen and (max-width: 300px) {
+    .adminmainL{
+        width: 100%;
+    }
+    .adminmainR{
+        display: none;
+    }
+  }
+
+  .adminlogo{
+    width: 50%;
+    max-width: 600px;
+    padding: 20px;
+    
+  }
+
+  .btn-outline-primary{
+    width: 100%;
+    margin-bottom: 10px;
+  }

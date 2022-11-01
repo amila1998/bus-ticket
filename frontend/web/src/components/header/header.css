@@ -11,6 +11,7 @@
 .navbar-nav .nav-link {
     color: var(--white) !important;
     font-weight: 700;
+    align-items: center;
 }
 
 .navbar-nav .nav-link:hover {

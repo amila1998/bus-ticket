@@ -34,7 +34,8 @@ app.use(fileUpload({
 app.get('/', (req, res) => {
     res.send('Server is ready');
   });
-
+  const userRoutes = require("./routes/userRoutes");
+  app.use(userRoutes);
   
 
 if (process.env.NODE_ENV === 'production') {

@@ -1,7 +1,7 @@
 :root {
-    --lightBlue: rgb(146,178,253);
-    --pink: rgb(245,148,183);
-    --purple:rgb(173,127,251);
+    --lightBlue: #8cacf7;
+    --pink: rgb(253, 48, 123);
+    --purple:#8a47fd;
     --slide: rgb(207,208,238);
     --slideB: rgb(184,187,232);
     --GradientBG: linear-gradient(to left, var(--slide), var(--slideB));
@@ -22,4 +22,6 @@
     --selecthover:rgb(63, 177, 248);
     --newPuple:rgb(43,49,90);
 
+    --PhoneInputCountrySelectArrow-color:var(--pink) !important;
+    --PhoneInput-color--focus:disabled !important;
 }
