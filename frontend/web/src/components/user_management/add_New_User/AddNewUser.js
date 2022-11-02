@@ -13,22 +13,30 @@ const AddNewUser = () => {
     const [visible2, setVisible2] = useState(false);
     const gState = useContext(GlobalState)
     const [isAdmin] = gState.userAPI.isAdmin
-    const [istransport_manager] = gState.userAPI.istransport_manager
     const [token] = gState.token
 
-    const [isLocal, setIsLocal] = useState('');
-    const [isToken, setIsToken] = useState(false);
+   // const [isLocal, setIsLocal] = useState('');
+    //const [isToken, setIsToken] = useState(false);
     const [role, setRole] = useState('')
-    console.log("🚀 ~ file: AddNewUser.js ~ line 22 ~ AddNewUser ~ role", role)
+    const [name,setName]= useState('');
+    const [email,setEmail]= useState('');
+    const [password,setPassword]= useState('Pa$$w0rd');
+    const [cf_password,setCf_Password]= useState('Pa$$w0rd');
+    const [nationalID,setNationalID]= useState('');
+    const [passportID,setPassportID]= useState('');
+    const [employeeID,setEmployeeID]= useState('');
 
-    const setIsLocalsValue = (e) => {
-        setIsLocal(e.target.value)
-        setIsToken(false)
-    }
 
-    const setIsHaveToken = (e) => {
-        setIsToken(!isToken)
-    }
+    
+    
+    // const setIsLocalsValue = (e) => {
+    //     setIsLocal(e.target.value)
+    //     setIsToken(false)
+    // }
+
+    // const setIsHaveToken = (e) => {
+    //     setIsToken(!isToken)
+    // }
 
     const handleClick = () => {
         setVisible(!visible);
@@ -39,13 +47,89 @@ const AddNewUser = () => {
     };
 
     const handleRole = (e) => {
-
-
+        setPassportID('')
+        setNationalID('')
+        setEmployeeID('')
         setRole(e.target.value)
+    }
+
+    const onChangeName = (e) => {
+        setName(e.target.value)
+    }
+
+    const onChangeEmail = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const onChangePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const onChangeCf_Password = (e) => {
+        setCf_Password(e.target.value)
+    }
+
+    const onChangePassportNo = (e) => {
+        setPassportID(e.target.value)
+    }
+
+    const onChangeNicNo = (e) => {
+        setNationalID(e.target.value)
+    }
+
+    const onChangeEmployeeID = (e) => {
+        setEmployeeID(e.target.value)
     }
 
 
     const [value, setValue] = useState()
+
+
+
+    const addUser =async(e) => {
+        e.preventDefault();
+        try {
+            if (password===cf_password){
+                const res = await axios.post('/api/auth/addUser',{email, password, role, phone:value, name, nationalID, passportID, employeeID}, {
+                    headers: { Authorization: token }
+                })
+                toast.success(res.data.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                window.location.href = "/userManagement";
+            }else{
+                toast.error('Passwords are not matched', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+            
+            
+        } catch (error) {
+            console.log("🚀 ~ file: AddNewUser.js ~ line 93 ~ addUser ~ error", error)
+            toast.error(error.response.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }
+
     return (
         <div className="layout">
             <ToastContainer />
@@ -56,7 +140,7 @@ const AddNewUser = () => {
                         <div className="row">
                             <div class="col-1"></div>
                             <div class="col-3"><label className="label">Name</label></div>
-                            <div class="col-7"><input className="inputs" type="name" name="name" required placeholder='Name' /><br /><br /></div>
+                            <div class="col-7"><input className="inputs" type="name" name="name" onChange={onChangeName} required placeholder='Name' /><br /><br /></div>
                         </div>
                         <div className="row">
                             <div class="col-1"></div>
@@ -75,7 +159,7 @@ const AddNewUser = () => {
                         <div className="row">
                             <div class="col-1"></div>
                             <div class="col-3"><label className="label">Email</label></div>
-                            <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='Email' /><br /><br /></div>
+                            <div class="col-7"><input className="inputs" type="email" name="email"  onChange={onChangeEmail}  required placeholder='Email' /><br /><br /></div>
                         </div>
                         <div className="row">
                             <div class="col-1"></div>
@@ -83,7 +167,10 @@ const AddNewUser = () => {
                             <div class="col-7">
                                 <select value={role} onChange={handleRole} className="inputs" >
                                     <option value={''} disabled selected>--Select a role--</option>
-                                    <option value={'admin'}>Admin</option>
+                                    {
+                                        isAdmin &&
+                                        <option value={"admin"}>Admin</option>
+                                    }
                                     <option value={'n_passanger'}>Local Passenger</option>
                                     <option value={'f_passanger'}>Foriegn Passenger</option>
                                     <option value={'bus_driver'}>Bus Driver</option>
@@ -98,12 +185,12 @@ const AddNewUser = () => {
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">Employee ID</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='Employee ID' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="employee Id"  onChange={onChangeEmployeeID}  required placeholder='Employee ID' /><br /><br /></div>
                                 </div>
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">NIC No</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='NIC No' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="NIC no"  onChange={onChangeNicNo}  required placeholder='NIC No' /><br /><br /></div>
                                 </div>
                             </>
                         }
@@ -113,12 +200,12 @@ const AddNewUser = () => {
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">Employee ID</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='Employee ID' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="employee Id" onChange={onChangeEmployeeID} required placeholder='Employee ID' /><br /><br /></div>
                                 </div>
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">NIC No</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='NIC No' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="NIC no" onChange={onChangeNicNo} required placeholder='NIC No' /><br /><br /></div>
                                 </div>
                             </>
                         }
@@ -128,12 +215,12 @@ const AddNewUser = () => {
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">Employee ID</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='Employee ID' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="employee Id" onChange={onChangeEmployeeID} required placeholder='Employee ID' /><br /><br /></div>
                                 </div>
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">NIC No</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='NIC No' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="NIC no" onChange={onChangeNicNo}  required placeholder='NIC No' /><br /><br /></div>
                                 </div>
                             </>
                         }
@@ -143,7 +230,7 @@ const AddNewUser = () => {
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">NIC No</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='NIC No' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="NIC no" onChange={onChangeNicNo} required placeholder='NIC No' /><br /><br /></div>
                                 </div>
                             </>
                         }
@@ -153,7 +240,7 @@ const AddNewUser = () => {
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">Passport No</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='Passport No' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="passport no" onChange={onChangePassportNo} required placeholder='Passport No' /><br /><br /></div>
                                 </div>
                             </>
                         }
@@ -161,7 +248,7 @@ const AddNewUser = () => {
                             <div class="row">
                                 <div class="col-1"></div>
                                 <div class="col-3"><label className="label">Password</label></div>
-                                <div class="col-7"><input className="inputs" type={visible ? "text" : "password"}
+                                <div class="col-7"><input className="inputs" value={password} onChange={onChangePassword} type={visible ? "text" : "password"}
                                     name="password" required
                                     placeholder='Password'
                                 /><span className="icons" onClick={handleClick}>{visible ? <MdVisibility /> : <MdVisibilityOff />}</span></div>
@@ -172,7 +259,7 @@ const AddNewUser = () => {
                             <div class="row">
                                 <div class="col-1"></div>
                                 <div class="col-3"><label className="label">Conform Password</label></div>
-                                <div class="col-7"><input className="inputs" type={visible ? "text" : "password"}
+                                <div class="col-7"><input className="inputs" value={cf_password} onChange={onChangeCf_Password} type={visible2 ? "text" : "password"}
                                     name="password" required
                                     placeholder='Re-Password'
                                 /><span className="icons" onClick={handleClick2}>{visible2 ? <MdVisibility /> : <MdVisibilityOff />}</span></div>
@@ -182,12 +269,9 @@ const AddNewUser = () => {
                     </div>
                     <div>
                         <div className=""><br />
-                            <center><button className="btnPink" type="submit" >Sign up</button></center></div> <br />
+                            <center><button className="btnPink"onClick={addUser} type="submit" >Add</button></center></div> <br />
                     </div>
                 </div>
-                <center>
-                    <a className="bodyLink" href="/signin">Sign In</a><br /> <br />
-                </center>
             </form>
         </div>
     )

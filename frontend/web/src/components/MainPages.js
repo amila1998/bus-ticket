@@ -4,6 +4,8 @@ import AddBusRoute from './busRoute/AddBusRoute';
 import BusRoute from './busRoute/BusRoute';
 import EditBusRoute from './busRoute/EditBusRoute';
 import BusTimeTable from './busTimeTable/BusTimeTable';
+import AddBusTimeTable from './busTimeTable/AddBusTimeTable';
+import EditBusTimeTable from './busTimeTable/EditBusTimeTable';
 import { GlobalState } from '../GlobalState';
 import AdminHome from './admin/AdminHome';
 import ForgotPassword from './forgotPassword/ForgotPassword';
@@ -18,6 +20,8 @@ import AddNewUser from './user_management/add_New_User/AddNewUser';
 import UserManagement from './user_management/UserManagement';
 import AllBusView from './busManagement/AllBusView';
 import AddBus from './busManagement/AddBus';
+import Profile from './Profile/Profile';
+import TransportManagerHome from './TransportManager/TransportManagerHome';
 
 const MainPages = () => {
   const state = useContext(GlobalState)
@@ -28,12 +32,16 @@ const MainPages = () => {
     return (
         <div className='main'> 
         <Routes>
-        <Route path='/' element={isAdmin?<AdminHome/>:<Home/>} />
+        <Route path='/' element={isAdmin?<AdminHome/>:istransport_manager?<TransportManagerHome/>:<Home/>} />
         <Route path='/signin' element={<Login />} />
         <Route path='/forgotPassword' element={<ForgotPassword />} />
         <Route path='/resetPassword' element={<ResetPassword/>} />
+        <Route path='/profile' element={<Profile/>} />
         
         <Route path='/busTimeTable' element={<BusTimeTable/>} />
+        <Route path='/addBusTimeTable' element={<AddBusTimeTable/>} />
+        <Route path='/editBusTimeTable/:id' element={<EditBusTimeTable/>} />
+
         <Route path='/signup' element={<Register/>} />
         <Route path='/ticketBooking' element={<TicketBooking/>} />
         <Route path='/busRoute' element={isLogged? <BusRoute/> : <Login />}/>

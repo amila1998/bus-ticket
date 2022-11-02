@@ -9,7 +9,6 @@ const tokenSchema = new Schema(
         },
         user_NIC_No: {
             type: String,
-            unique: true
         },
         expiredDate:{
             type:Date, 

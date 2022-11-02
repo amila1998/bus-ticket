@@ -7,21 +7,72 @@ import "react-toastify/dist/ReactToastify.css";
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 
+
 const Register = () => {
     const [visible, setVisible] = useState(false);
     const [visible2, setVisible2] = useState(false);
 
     const [isLocal, setIsLocal] = useState('');
+    console.log("🚀 ~ file: Register.js ~ line 16 ~ Register ~ isLocal", isLocal)
     const [isToken, setIsToken] = useState(false);
-    console.log("🚀 ~ file: Register.js ~ line 16 ~ Register ~ isToken", isToken)
+    const [tokenID, setTokenID] = useState('');
+    const [isButtonDisable, setIsButtonDisable] = useState(true);
+
+    const genarateToken = async () => {
+        try {
+            setTokenID('');
+            let token;
+            let isEqual = true
+            while (isEqual === true) {
+                try {
+                    if (!isEqual) {
+                        break;
+                    }
+                    token = 'T' + Math.floor((Math.random() * 100000000)) + '_tmp';
+                    const res = await axios.post('/api/token/checkToken', { token })
+                    isEqual = res.data.success
+                } catch (error) {
+                    console.log("🚀 ~ file: Register.js ~ line 34 ~ genarateToken ~ error", error)
+                    break;
+                }
+            }
+            if (!isEqual) {
+                const res = await axios.post("/api/token/genareteToken", { tokenID: token, tokenType: 'tmp' })
+                setTokenID(res.data.Token.tokenID);
+            }
+        } catch (error) {
+            console.log("🚀 ~ file: Register.js ~ line 24 ~ genarateToken ~ error", error)
+            toast.error(error.response.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
+    }
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [cf_password, setCf_Password] = useState('')
+    const [nationalID, setNationalID] = useState('')
+    const [passportNo, setPassportNo] = useState('')
+    const [value, setValue] = useState() //phone number
 
     const setIsLocalsValue = (e) => {
         setIsLocal(e.target.value)
         setIsToken(false)
+        setTokenID('')
+        setNationalID('')
+        setPassportNo('')
     }
 
     const setIsHaveToken = (e) => {
         setIsToken(!isToken)
+        setTokenID('')
     }
 
     const handleClick = () => {
@@ -32,7 +83,87 @@ const Register = () => {
         setVisible2(!visible2);
     };
 
-    const [value, setValue] = useState()
+    const changeName = (e) => {
+        setName(e.target.value)
+    }
+
+    const changeEmail = (e) => {
+        setEmail(e.target.value)
+    }
+
+    const changePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const changeCf_Password = (e) => {
+        setCf_Password(e.target.value)
+    }
+
+    const changeNationalID = (e) => {
+        setNationalID(e.target.value)
+    }
+
+    const changePassportNo = (e) => {
+        setPassportNo(e.target.value)
+    }
+
+
+    const changeTokenID = (e) => {
+        setTokenID(e.target.value)
+    }
+
+
+    const register = async (e) => {
+        e.preventDefault();
+        if (password !== cf_password) {
+            toast.error('Passwords are not matched', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else {
+            try {
+                const res = await axios.post('api/auth/register', {
+                    email,
+                    password,
+                    role: isLocal === 'local' ? 'n_passanger' : 'f_passanger',
+                    phone: value,
+                    name,
+                    nationalID,
+                    passportID: passportNo,
+                    tokenID
+                })
+
+                toast.success(res.data.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                window.location.href = "/signin";
+
+            } catch (error) {
+                console.log("🚀 ~ file: Register.js ~ line 121 ~ register ~ error", error)
+                toast.error(error.response.data.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+        }
+
+    }
     return (
         <div className="layout">
             <ToastContainer />
@@ -43,7 +174,7 @@ const Register = () => {
                         <div className="row">
                             <div class="col-1"></div>
                             <div class="col-3"><label className="label">Name</label></div>
-                            <div class="col-7"><input className="inputs" type="name" name="name" required placeholder='Name' /><br /><br /></div>
+                            <div class="col-7"><input className="inputs" value={name} onChange={changeName} type="name" name="name" required placeholder='Name' /><br /><br /></div>
                         </div>
                         <div className="row">
                             <div class="col-1"></div>
@@ -76,7 +207,7 @@ const Register = () => {
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">NIC No</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='National Identy Card Number' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="NIC No" value={nationalID} onChange={changeNationalID} required placeholder='National Identy Card Number' /><br /><br /></div>
                                 </div>
                                 <hr />
                                 <div className="row">
@@ -94,11 +225,11 @@ const Register = () => {
                                         <div className="row">
                                             <div class="col-1"></div>
                                             <div class="col-3"><label className="label">Token ID</label></div>
-                                            <div class="col-7"><input className="inputs" type="name" name="name" required placeholder='Token ID' /><br /><br /></div>
+                                            <div class="col-7"><input className="inputs" type="text" name="Token ID" value={tokenID} onChange={changeTokenID} required placeholder='Token ID' /><br /><br /></div>
                                         </div>
                                     </> : <>
                                         <div className="row">
-                                            <div className='warningNoToken'>Make sure to get a token nearest Bus Depo</div><br /><br></br>
+                                            <div className='warningNoToken'>Make sure to get a token nearest Bus depot office</div><br /><br></br>
                                         </div>
                                     </>
                                 }
@@ -110,7 +241,7 @@ const Register = () => {
                                 <div className="row">
                                     <div class="col-1"></div>
                                     <div class="col-3"><label className="label">Passport No</label></div>
-                                    <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='Passport Number' /><br /><br /></div>
+                                    <div class="col-7"><input className="inputs" type="text" name="passport_no" value={passportNo} onChange={changePassportNo} required placeholder='Passport Number' /><br /><br /></div>
                                 </div>
                                 <hr />
                                 <div className="row">
@@ -128,26 +259,31 @@ const Register = () => {
                                         <div className="row">
                                             <div class="col-1"></div>
                                             <div class="col-3"><label className="label">Token ID</label></div>
-                                            <div class="col-7"><input className="inputs" type="name" name="name" required placeholder='Token ID' /><br /><br /></div>
+                                            <div class="col-7"><input className="inputs" type="text" name="Token ID" value={tokenID} onChange={changeTokenID} required placeholder='Token ID' /><br /><br /></div>
                                         </div>
                                     </> : <>
                                         <div className="row">
-                                            <button>Genarate Tempery Token</button><br /><br></br>
+                                            {
+                                                tokenID && <h6>Your Token Number is : {tokenID}</h6>
+                                            }
+                                            <div className="btn btn-outline-warning" onClick={genarateToken} >Genarate Tempery Token</div><br /><br></br>
+
                                         </div>
                                     </>
                                 }
+                                <hr />
                             </>
                         }
                         <div className="row">
                             <div class="col-1"></div>
                             <div class="col-3"><label className="label">Email</label></div>
-                            <div class="col-7"><input className="inputs" type="email" name="email" required placeholder='Email' /><br /><br /></div>
+                            <div class="col-7"><input className="inputs" type="email" name="email" value={email} onChange={changeEmail} required placeholder='Email' /><br /><br /></div>
                         </div>
                         <div className="">
                             <div class="row">
                                 <div class="col-1"></div>
                                 <div class="col-3"><label className="label">Password</label></div>
-                                <div class="col-7"><input className="inputs" type={visible ? "text" : "password"}
+                                <div class="col-7"><input className="inputs" onChange={changePassword} type={visible ? "text" : "password"}
                                     name="password" required
                                     placeholder='Password'
                                 /><span className="icons" onClick={handleClick}>{visible ? <MdVisibility /> : <MdVisibilityOff />}</span></div>
@@ -158,7 +294,7 @@ const Register = () => {
                             <div class="row">
                                 <div class="col-1"></div>
                                 <div class="col-3"><label className="label">Conform Password</label></div>
-                                <div class="col-7"><input className="inputs" type={visible ? "text" : "password"}
+                                <div class="col-7"><input className="inputs" onChange={changeCf_Password} type={visible2 ? "text" : "password"}
                                     name="password" required
                                     placeholder='Re-Password'
                                 /><span className="icons" onClick={handleClick2}>{visible2 ? <MdVisibility /> : <MdVisibilityOff />}</span></div>
@@ -168,7 +304,7 @@ const Register = () => {
                     </div>
                     <div>
                         <div className=""><br />
-                            <center><button className="btnPink" type="submit" >Sign up</button></center></div> <br />
+                            <center><button className="btnPink" onClick={register} type="submit" >Sign up</button></center></div> <br />
                     </div>
                 </div>
                 <center>
