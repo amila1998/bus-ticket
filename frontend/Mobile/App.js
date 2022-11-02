@@ -9,7 +9,7 @@ import RootStackScreensRoute from './src/router/RootStackScreensRoute';
 import MainTabScreenRoute from './src/router/MainTabScreenRoute';
 
 export default function App() {
-  const [isLoggin, setIsLoggin] = React.useState(false)
+  const [isLoggin, setIsLoggin] = React.useState(true)
   return (
     <NavigationContainer>
       {

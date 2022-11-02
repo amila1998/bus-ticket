@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     defaultButton: {
         padding: 15,
-        backgroundColor: '#FF6D27',
+        backgroundColor: '#fd307b',
         borderRadius: 50,
     },
 
