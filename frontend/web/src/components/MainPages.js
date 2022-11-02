@@ -34,9 +34,9 @@ const MainPages = () => {
         <Route path='/busTimeTable' element={<BusTimeTable/>} />
         <Route path='/signup' element={<Register/>} />
         <Route path='/ticketBooking' element={<TicketBooking/>} />
-        <Route path='/busRoute' element={<BusRoute/>}/>
-        <Route path='/addBusRoute' element={<AddBusRoute/>}/>
-        <Route path='/editBusRoute' element={<EditBusRoute/>}/>
+        <Route path='/busRoute' element={isLogged? <BusRoute/> : <Login />}/>
+        <Route path='/addBusRoute' element={isLogged?<AddBusRoute/> : <Login />}/>
+        <Route path='/editBusRoute/:busRouteId' element={isLogged?<EditBusRoute/> : <Login />}/>
         
 
         <Route path='/userManagement' element={isAdmin?<UserManagement/>:istransport_manager&&<UserManagement/>} />

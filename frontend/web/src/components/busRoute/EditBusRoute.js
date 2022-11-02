@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './busRoute.css'
@@ -13,6 +14,19 @@ function EditBusRoute() {
         setBusRoute({ ...busRoute, [e.target.name]: e.target.value });
     };
 
+    useEffect(() => {
+        const getABusRoute = async () => {
+            try {
+                const res = await axios.get(`/api/getABusRoute/${busRouteId}`)
+                setBusRoute(res.data.fetch)
+                //console.log(res)
+            } catch (error) {
+                alert(error.message)
+            }
+        }
+        getABusRoute()
+    }, [busRouteId])
+
     const editBusRouteHandler = async (e) => {
         e.preventDefault();
         // check fields
@@ -21,6 +35,32 @@ function EditBusRoute() {
         //         className: "toast-failed",
         //         bodyClassName: "toast-failed",
         //     });
+
+        try {
+            const res = await axios.put(`/api/editBusRoute/${busRouteId}`, { "routeNumber" : busRoute.routeNumber, "strtlocation" :busRoute.strtlocation, "desLocation" : busRoute.desLocation });
+            toast.success(res.data.msg, {
+            
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            window.location.href = '/busRoute'
+        } catch (error) {
+            toast.error(error.response.data.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            console.log(error);
+        }
 
     };
 
