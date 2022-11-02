@@ -1,4 +1,4 @@
-import { LinearGradient } from 'expo-linear-gradient';
+
 import React from 'react'
 
 import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native';

@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { LinearGradient } from 'expo-linear-gradient'
+
 import React from 'react'
 import { Image, View } from 'react-native'
 
@@ -7,14 +7,14 @@ const Splash = () => {
     const [isGo, setisGo] = React.useState(true)
     const navigation = useNavigation();
 
-    // React.useEffect(() => {
-    //     if (isGo) {
-    //         setTimeout(() => {
-    //             navigation.navigate('Login');
-    //             setisGo(false)
-    //         }, 2000)
-    //     }
-    // }, [isGo])
+    React.useEffect(() => {
+        if (isGo) {
+            setTimeout(() => {
+                navigation.navigate('Login');
+                setisGo(false)
+            }, 2000)
+        }
+    }, [isGo])
     return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , backgroundColor:'#8cacf7'}}>
                 <View>
