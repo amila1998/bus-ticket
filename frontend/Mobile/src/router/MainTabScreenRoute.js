@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator,DrawerActions } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Ionicons,MaterialCommunityIcons,FontAwesome} from '@expo/vector-icons';
@@ -21,6 +21,7 @@ const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
+
 
 const MainTabScreen = () => (
     <Tab.Navigator
@@ -80,7 +81,7 @@ const HomeStackScreen = ({navigation}) => (
             <HomeStack.Screen name="Home" component={Home}  options={{
         title:'Home',
         headerLeft: () => (
-            <Icon.Button name="ios-menu" size={25} backgroundColor="#8a47fd" onPress={() => navigation.openDrawer()}></Icon.Button>
+            <Icon.Button name="ios-menu" size={25} backgroundColor="#8a47fd" onPress={() => navigation.dispatch(DrawerActions.openDrawer())}></Icon.Button>
         )
         }} />
     </HomeStack.Navigator>
