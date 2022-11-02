@@ -17,10 +17,9 @@ const Login = () => {
         e.preventDefault()
         try {
             const res = await axios.post('http://localhost:8090/api/auth/login',{email, password:Password})
-            alert(res.data.message)
+            console.log(res.data.message)
         } catch (error) {
             console.log("🚀 ~ file: Login.js ~ line 20 ~ loginHandler ~ error", error)
-            alert(error.response.data.message)
         }
 
     }

@@ -1,14 +1,36 @@
 
+import axios from 'axios';
 import React from 'react'
 
-import { StyleSheet, Text, View, Button, SafeAreaView, ScrollView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, SafeAreaView, ScrollView, TextInput, TouchableOpacity, Image } from 'react-native';
 const Home = () => {
+    const [allRoutes,setAllRoutes]= React.useState([])
+    console.log("🚀 ~ file: Home.js ~ line 8 ~ Home ~ allRoutes", allRoutes)
+    React.useEffect(() => {
+     
+        const getAllRoutes = async() =>{
+            try {
+                const res = axios.get('http://192.168.43.112:8090/api/timetable/')
+                console.log("🚀 ~ file: Home.js ~ line 14 ~ getAllRoutes ~ res", res)
+                setAllRoutes(res.data.AllTimetables)
+            } catch (error) {
+                console.log("🚀 ~ file: Home.js ~ line 16 ~ getAllRoutes ~ error", error)
+                
+            }
+        }
+
+        getAllRoutes();
+    
+      
+    }, [])
+    
     return (
         <SafeAreaView style={styles.mainContainer}>
             <ScrollView>
                 <View style={styles.main}>  
                 <View>
-                    <View style={{padding:10,backgroundColor:'#b8bbe8'}}>
+                <Image resizeMode={'contain'} style={styles.defultBg} source={require('../../assets/logo.png')} />
+                    <View style={{padding:10}}>
                     <View>
                         <Text style={styles.title}>Find Availble Buses</Text>
                     </View>
@@ -27,7 +49,11 @@ const Home = () => {
                     
                 </View>
                 <View>
-                
+                {/* {
+                    allRoutes.map(a=>(
+                        <View id={a._id}></View>
+                    ))
+                } */}
                 </View>
                 </View>
 
