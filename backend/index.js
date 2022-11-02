@@ -41,6 +41,13 @@ app.use(userRoutes);
 const busRoutes = require("./routes/busRouteRoutes");
 app.use(busRoutes);
 
+const timetableRoutes = require("./routes/timetableRoute");
+app.use(timetableRoutes);
+
+const tokenRoutes = require("./routes/tokenRoute");
+app.use(tokenRoutes);
+
+
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
     const path = require('path');
