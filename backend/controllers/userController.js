@@ -3,12 +3,13 @@ const jwt = require("jsonwebtoken");
 const createToken = require("../helpers/createToken");
 const validateEmail = require("../helpers/validateEmail");
 const User = require("../models/userModel");
+const Token = require("../models/tokenModel");
 
 
 const userController = {
     register: async (req, res) => {
         try {
-            const { email, password, role, phone, name, nationalID, passportID, tokenID } = req.body;
+            const { email, password, role, phone, name, nationalID, passportID, tokenID, employeeID } = req.body;
 
             // check fields
             if (!name || !email || !password || !role)
@@ -40,20 +41,51 @@ const userController = {
                     return res
                         .status(400)
                         .json({ message: "Please enter your national identy card" });
+
+                if (!tokenID) {
+                    return res
+                        .status(400)
+                        .json({ message: "There should be a your token number" });
+                }
             }
 
-            if (role === 'n_passanger') {
+            if (role === 'n_employee' || role === 'f_employee') {
+                if (tokenID) {
+                    const token = Token.findOne({ tokenID: tokenID })
+                    if (!token) {
+                        return res
+                            .status(400)
+                            .json({ message: "Invalid token number" });
+                    }
+                }
+            }
+
+
+            if (role === 'f_passanger') {
                 if (!passportID)
                     return res
                         .status(400)
                         .json({ message: "Please enter your passport number" });
+
+                if (!tokenID) {
+                    return res
+                        .status(400)
+                        .json({ message: "Please genarate your token number" });
+                }
             }
 
-            // if (!tokenID) {
-            //     return res
-            //         .status(400)
-            //         .json({ message: "There should be a your token number" });
-            // }
+            if (role === 'transport_manager') {
+                if (!employeeID)
+                    return res
+                        .status(400)
+                        .json({ message: "Please enter employee number" });
+                if (!nationalID)
+                    return res
+                        .status(400)
+                        .json({ message: "Please enter national identy number" });
+            }
+
+
 
             // hash password
             const salt = await bcrypt.genSalt();
@@ -70,13 +102,30 @@ const userController = {
 
             const user = await newUser.save();
 
+            if (role === 'transport_manager') {
+                await User.findByIdAndUpdate(user._id, { 'transport_manager.NICNo': nationalID, 'transport_manager.employeeID': employeeID })
+            }
+
+            if (role === 'bus_driver') {
+                await User.findByIdAndUpdate(user._id, { 'bus_driver.NICNo': nationalID, 'bus_driver.employeeID': employeeID })
+            }
+
+            if (role === 'inspector') {
+                await User.findByIdAndUpdate(user._id, { 'inspector.NICNo': nationalID, 'inspector.employeeID': employeeID })
+            }
+
             if (role === 'n_passanger') {
                 await User.findByIdAndUpdate(user._id, { 'n_passanger.nationalID': nationalID })
+                await Token.findOneAndUpdate({ tokenID }, { 'user_NIC_No': nationalID })
             }
 
             if (role === 'f_passanger') {
-                await User.findByIdAndUpdate(user._id, { 'n_passanger.passportID': passportID })
+                await User.findByIdAndUpdate(user._id, { 'f_passanger.passportID': passportID })
+                await Token.findOneAndUpdate({ tokenID }, { 'user_NIC_No': passportID })
             }
+
+
+
 
             res.status(200).json({
                 message: "User Registartion Succeessfull !!!",
@@ -145,10 +194,10 @@ const userController = {
     },
     logout: async (req, res) => {
 
-        const token = createToken.access({id: 'asdjkasdasdhashdkasd' });
+        const token = createToken.access({ id: 'asdjkasdasdhashdkasd' });
         res.status(200).json({ msg: "Signout success" });
     },
-    getAllUsers:async (req, res) =>{
+    getAllUsers: async (req, res) => {
         try {
             const users = await User.find().select('-password')
             res.status(200).json(users)

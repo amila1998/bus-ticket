@@ -31,43 +31,35 @@ const userSchema = new Schema(
         f_passanger:{
             passportID:{
                 type:String,
-                unique:true,
             }
         },
         n_passanger:{
             nationalID:{
                 type:String,
-                unique:true
             }
         },
         bus_driver:{
             employeeID:{
                 type:String,
-                unique:true,
             },
             NICNo:{
                 type:String,
-                unique:true,
             },
         },
         inspector:{
             employeeID:{
                 type:String,
-                unique:true,
             },
             NICNo:{
                 type:String,
-                unique:true,
             },
         },
         transport_manager:{
             employeeID:{
                 type:String,
-                unique:true,
             },
             NICNo:{
                 type:String,
-                unique:true,
             },
         },
         isVerify:{

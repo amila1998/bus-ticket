@@ -11,7 +11,7 @@ const Header = () => {
     return (
         <div><nav className="navbar navbar-expand-lg fixed-top navbar-light bg-color">
             <div className="container-fluid">
-                <a className="navbar-brand ms-5" >
+                <a className="navbar-brand ms-5"  href='/'>
                     <img src={logo} alt="" width="155" height="50" />
                     {/* <h4>Sri Lanka <br />Public Transport Ticketing System</h4> */}
                 </a>
