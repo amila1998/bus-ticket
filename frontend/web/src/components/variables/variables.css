@@ -3,7 +3,7 @@
     --pink: #fd307b;
     --purple:#8a47fd;
     --slide: rgb(207,208,238);
-    --slideB: rgb(184,187,232);
+    --slideB: #b8bbe8;
     --GradientBG: linear-gradient(to left, var(--slide), var(--slideB));
     --white: rgb(255, 255, 255);
     --black: black;
