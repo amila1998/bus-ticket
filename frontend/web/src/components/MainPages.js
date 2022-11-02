@@ -4,6 +4,8 @@ import AddBusRoute from './busRoute/AddBusRoute';
 import BusRoute from './busRoute/BusRoute';
 import EditBusRoute from './busRoute/EditBusRoute';
 import BusTimeTable from './busTimeTable/BusTimeTable';
+import AddBusTimeTable from './busTimeTable/AddBusTimeTable';
+import EditBusTimeTable from './busTimeTable/EditBusTimeTable';
 import { GlobalState } from '../GlobalState';
 import AdminHome from './admin/AdminHome';
 import ForgotPassword from './forgotPassword/ForgotPassword';
@@ -32,6 +34,9 @@ const MainPages = () => {
         <Route path='/resetPassword' element={<ResetPassword/>} />
         
         <Route path='/busTimeTable' element={<BusTimeTable/>} />
+        <Route path='/addBusTimeTable' element={<AddBusTimeTable/>} />
+        <Route path='/editBusTimeTable/:id' element={<EditBusTimeTable/>} />
+
         <Route path='/signup' element={<Register/>} />
         <Route path='/ticketBooking' element={<TicketBooking/>} />
         <Route path='/busRoute' element={<BusRoute/>}/>
