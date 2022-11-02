@@ -16,6 +16,8 @@ import GenarateToken from './tokenManagement/genarateToken/GenarateToken';
 import TokenManagement from './tokenManagement/TokenManagement';
 import AddNewUser from './user_management/add_New_User/AddNewUser';
 import UserManagement from './user_management/UserManagement';
+import Profile from './Profile/Profile';
+import TransportManagerHome from './TransportManager/TransportManagerHome';
 
 const MainPages = () => {
   const state = useContext(GlobalState)
@@ -26,10 +28,11 @@ const MainPages = () => {
     return (
         <div className='main'> 
         <Routes>
-        <Route path='/' element={isAdmin?<AdminHome/>:<Home/>} />
+        <Route path='/' element={isAdmin?<AdminHome/>:istransport_manager?<TransportManagerHome/>:<Home/>} />
         <Route path='/signin' element={<Login />} />
         <Route path='/forgotPassword' element={<ForgotPassword />} />
         <Route path='/resetPassword' element={<ResetPassword/>} />
+        <Route path='/profile' element={<Profile/>} />
         
         <Route path='/busTimeTable' element={<BusTimeTable/>} />
         <Route path='/signup' element={<Register/>} />

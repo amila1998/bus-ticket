@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const createToken = require("../helpers/createToken");
 const validateEmail = require("../helpers/validateEmail");
 const User = require("../models/userModel");
+const Token = require("../models/tokenModel");
 
 
 const userController = {
@@ -47,6 +48,18 @@ const userController = {
                         .json({ message: "There should be a your token number" });
                 }
             }
+
+            if (role === 'n_employee' || role === 'f_employee') {
+                if (tokenID) {
+                    const token = Token.findOne({ tokenID: tokenID })
+                    if (!token) {
+                        return res
+                            .status(400)
+                            .json({ message: "Invalid token number" });
+                    }
+                }
+            }
+
 
             if (role === 'f_passanger') {
                 if (!passportID)
@@ -103,11 +116,16 @@ const userController = {
 
             if (role === 'n_passanger') {
                 await User.findByIdAndUpdate(user._id, { 'n_passanger.nationalID': nationalID })
+                await Token.findOneAndUpdate({ tokenID }, { 'user_NIC_No': nationalID })
             }
 
             if (role === 'f_passanger') {
-                await User.findByIdAndUpdate(user._id, { 'n_passanger.passportID': passportID })
+                await User.findByIdAndUpdate(user._id, { 'f_passanger.passportID': passportID })
+                await Token.findOneAndUpdate({ tokenID }, { 'user_NIC_No': passportID })
             }
+
+
+
 
             res.status(200).json({
                 message: "User Registartion Succeessfull !!!",
