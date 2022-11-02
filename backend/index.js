@@ -36,7 +36,9 @@ app.get('/', (req, res) => {
   });
   const userRoutes = require("./routes/userRoutes");
   app.use(userRoutes);
-  
+
+  const timetableRoutes = require("./routes/timetableRoute");
+  app.use(timetableRoutes);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
