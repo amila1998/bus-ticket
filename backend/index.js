@@ -33,15 +33,24 @@ app.use(fileUpload({
 //routes
 app.get('/', (req, res) => {
     res.send('Server is ready');
-  });
-  const userRoutes = require("./routes/userRoutes");
-  app.use(userRoutes);
+});
 
-  const timetableRoutes = require("./routes/timetableRoute");
-  app.use(timetableRoutes);
-  const tokenRoutes = require("./routes/tokenRoute");
-  app.use(tokenRoutes);
-  
+const userRoutes = require("./routes/userRoutes");
+app.use(userRoutes);
+
+const busRoutes = require("./routes/busRouteRoutes");
+app.use(busRoutes);
+
+
+const timetableRoutes = require("./routes/timetableRoute");
+app.use(timetableRoutes);
+
+const tokenRoutes = require("./routes/tokenRoute");
+app.use(tokenRoutes);
+
+const busesRoutes = require("./routes/busRoute");
+app.use(busesRoutes);
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
