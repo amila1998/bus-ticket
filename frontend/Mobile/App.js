@@ -7,15 +7,20 @@ import Splash from './src/screen/splash/Splash';
 import React from 'react';
 import RootStackScreensRoute from './src/router/RootStackScreensRoute';
 import MainTabScreenRoute from './src/router/MainTabScreenRoute';
+import LoginProvider from './src/context/LoginProvider';
+import Main from './src/Main';
 
 export default function App() {
   const [isLoggin, setIsLoggin] = React.useState(true)
   return (
-    <NavigationContainer>
-      {
-        !isLoggin ? <RootStackScreensRoute /> : <MainTabScreenRoute />
-      }
-    </NavigationContainer>
+    <LoginProvider>
+      <NavigationContainer>
+       {/* <Main/> */}
+       {
+          !isLoggin ? <RootStackScreensRoute /> : <MainTabScreenRoute />
+        }
+      </NavigationContainer>
+    </LoginProvider>
   );
 }
 

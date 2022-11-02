@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
+import { useLogin } from '../../context/LoginProvider'
+import client from '../../api/client'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [Password, setPasword] = useState('')
     const Navigator = useNavigation();
+    const { setIsLoggedIn, setToken } = useLogin();
 
     const navigateRegister = () => {
         Navigator.navigate('Register')
@@ -16,8 +19,10 @@ const Login = () => {
     const loginHandler = async(e) => {
         e.preventDefault()
         try {
-            const res = await axios.post('http://localhost:8090/api/auth/login',{email, password:Password})
-            console.log(res.data.message)
+            const res = await client.post('/api/auth/login', {email, password:Password});
+            console.log("🚀 ~ file: Login.js ~ line 23 ~ loginHandler ~ res", res)
+            setIsLoggedIn(true);
+            setToken(res.data.token);
         } catch (error) {
             console.log("🚀 ~ file: Login.js ~ line 20 ~ loginHandler ~ error", error)
         }
