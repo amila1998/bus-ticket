@@ -9,6 +9,7 @@ import Profile from '../screen/Profile';
 import Colors from '../Styles/Colors';
 import Notifications from '../screen/Notifications';
 import Home from '../screen/Home';
+import BusTimeTables from '../screen/busTimeTables/BusTimeTables';
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
@@ -83,6 +84,10 @@ const HomeStackScreen = ({navigation}) => (
         headerLeft: () => (
             <Icon.Button name="ios-menu" size={25} backgroundColor="#8a47fd" onPress={() => navigation.dispatch(DrawerActions.openDrawer())}></Icon.Button>
         )
+        }} />
+             <HomeStack.Screen name="Bus_Time_Tables" component={BusTimeTables}  options={{
+        title:'Bus Time Tables',
+        headerShown: true,
         }} />
     </HomeStack.Navigator>
     );
