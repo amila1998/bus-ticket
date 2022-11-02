@@ -41,11 +41,15 @@ app.use(userRoutes);
 const busRoutes = require("./routes/busRouteRoutes");
 app.use(busRoutes);
 
+
 const timetableRoutes = require("./routes/timetableRoute");
 app.use(timetableRoutes);
 
 const tokenRoutes = require("./routes/tokenRoute");
 app.use(tokenRoutes);
+
+const busesRoutes = require("./routes/busRoute");
+app.use(busesRoutes);
 
 
 if (process.env.NODE_ENV === 'production') {
