@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import './busRoute.css'
@@ -21,11 +22,40 @@ function AddBusRoute() {
     const addBusRouteHandler = async (e) => {
         e.preventDefault();
         // check fields
-        if (!routeNumber || !strtlocation || !desLocation)
+        if (!routeNumber || !strtlocation || !desLocation) {
             return toast("Please fill in all fields.", {
                 className: "toast-failed",
                 bodyClassName: "toast-failed",
             });
+        } else {
+            try {
+                const res = await axios.post("/api/addBusRoute", { routeNumber, strtlocation, desLocation });
+                toast.success(res.data.msg, {
+                
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                window.location.href = '/busRoute'
+            } catch (error) {
+                //alert(error.response.data);
+                toast.error(error.response.data.message, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                console.log(error);
+            }
+        }
+
 
     };
 
@@ -60,7 +90,7 @@ function AddBusRoute() {
                         <br />
                         <center>
                             <button className="deleteBtn me-5" type="submit" onClick={cancelBtn} >Cancel</button>
-                            <button className="editBtn ms-5" type="submit" onClick={addBusRouteHandler} style={{width:"130px"}}>Add </button>
+                            <button className="editBtn ms-5" type="submit" onClick={addBusRouteHandler} style={{ width: "130px" }}>Add </button>
                         </center>
                         <br />
                     </div>
