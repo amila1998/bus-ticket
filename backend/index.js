@@ -39,6 +39,9 @@ app.get('/', (req, res) => {
 
   const timetableRoutes = require("./routes/timetableRoute");
   app.use(timetableRoutes);
+  const tokenRoutes = require("./routes/tokenRoute");
+  app.use(tokenRoutes);
+  
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
