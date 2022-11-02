@@ -36,6 +36,9 @@ app.get('/', (req, res) => {
   });
   const userRoutes = require("./routes/userRoutes");
   app.use(userRoutes);
+
+  const timetableRoutes = require("./routes/timetableRoute");
+  app.use(timetableRoutes);
   const tokenRoutes = require("./routes/tokenRoute");
   app.use(tokenRoutes);
   
