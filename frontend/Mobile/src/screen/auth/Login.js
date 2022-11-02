@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import axios from 'axios'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -9,6 +10,19 @@ const Login = () => {
 
     const navigateRegister = () => {
         Navigator.navigate('Register')
+    }
+
+
+    const loginHandler = async(e) => {
+        e.preventDefault()
+        try {
+            const res = await axios.post('http://localhost:8090/api/auth/login',{email, password:Password})
+            alert(res.data.message)
+        } catch (error) {
+            console.log("🚀 ~ file: Login.js ~ line 20 ~ loginHandler ~ error", error)
+            alert(error.response.data.message)
+        }
+
     }
     return (
         <SafeAreaView style={styles.mainContainer}>
@@ -25,7 +39,7 @@ const Login = () => {
                             <TextInput onChangeText={setPasword} style={styles.textInput} placeholder='Password' secureTextEntry={true}></TextInput>
                         </View>
                         <View style={styles.formInput}>
-                            <TouchableOpacity style={styles.defaultButton}>
+                            <TouchableOpacity onPress={loginHandler} style={styles.defaultButton}>
                                 <Text style={{ textAlign: 'center', fontSize: 16, color: '#fff' }}>Login</Text>
                             </TouchableOpacity>
                         </View>

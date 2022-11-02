@@ -1,14 +1,25 @@
 
 import React from 'react'
 
-import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, SafeAreaView, ScrollView } from 'react-native';
 const Home = () => {
     return (
-            <SafeAreaView style={styles.mainContainer}>
+        <SafeAreaView style={styles.mainContainer}>
+            <ScrollView>
+                <View style={styles.main}>
                 <View>
-                    <Text>Home</Text>
+                    
                 </View>
-            </SafeAreaView>
+                <View>
+                {
+                   <>
+                   </> 
+                }
+                </View>
+                </View>
+
+            </ScrollView>
+        </SafeAreaView>
 
 
     )
@@ -19,8 +30,12 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#8cacf7',
     },
     dummyText: {
+    },
+    main: {
+        flex: 2,
     },
 
 })

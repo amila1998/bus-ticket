@@ -4,10 +4,10 @@ import { SafeAreaView, ScrollView, StyleSheet, View, Text, Image, TextInput, But
 const Register = () => {
     const [number, onChangeNumber] = React.useState(null);
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 ,backgroundColor:'#8cacf7'}}>
             <ScrollView>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <Image source={require('../../assets/adaptive-icon.png')} resizeMode='contain' style={{ height: 200, marginTop: 10 }} />
+                    <Image source={require('../../../assets/logo.png')} resizeMode='contain' style={{ width:'100%', height: 200, marginTop: 10 }} />
                 </View>
                 <View style={styles.container}>
                     <Text style={styles.myTitle}>Passenger Register</Text>
@@ -130,7 +130,7 @@ const Register = () => {
 }
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
+        backgroundColor: '#8cacf7',
     },
     myTitle: {
         fontSize: 24,
