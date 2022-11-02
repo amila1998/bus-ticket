@@ -18,6 +18,8 @@ import GenarateToken from './tokenManagement/genarateToken/GenarateToken';
 import TokenManagement from './tokenManagement/TokenManagement';
 import AddNewUser from './user_management/add_New_User/AddNewUser';
 import UserManagement from './user_management/UserManagement';
+import AllBusView from './busManagement/AllBusView';
+import AddBus from './busManagement/AddBus';
 import Profile from './Profile/Profile';
 import TransportManagerHome from './TransportManager/TransportManagerHome';
 
@@ -52,6 +54,10 @@ const MainPages = () => {
 
         <Route path='/tokenManagement' element={<TokenManagement/>}/>
         <Route path='/genarateToken' element={<GenarateToken/>}/>
+        
+        <Route path='/AllBusView' element={<AllBusView/>}/>
+        <Route path='/AddBus' element={<AddBus/>}/>
+
         </Routes>
   </div>
   )
