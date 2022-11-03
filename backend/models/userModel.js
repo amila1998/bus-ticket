@@ -17,7 +17,6 @@ const userSchema = new Schema(
         },
         tokenID: {
             type: String,
-            unique: true,
         },
         password: { type: String, required: true },
         phone:{

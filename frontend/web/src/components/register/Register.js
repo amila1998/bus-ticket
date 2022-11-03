@@ -169,7 +169,7 @@ const Register = () => {
             <ToastContainer />
             <form className="form" controlId="formBasicEmail" action="">
                 <div className=""><br />
-                    <h2 className="brand-title"><center>Passanger Register</center></h2>
+                    <h2 className="brand-title"><center>Passenger Register</center></h2>
                     <div className="inpt"> <br /><br />
                         <div className="row">
                             <div class="col-1"></div>
