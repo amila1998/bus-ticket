@@ -75,6 +75,22 @@ getAll: async(req, res) => {
             success: false
     });
     }
-}
+},
+
+getOne:async(req,res)=>{
+    try {
+        let TimetableId = req.params.id ;
+        const OneTimetables = await TimeTable.findOne({"_id":TimetableId});
+        res.status(200).json({ 
+            OneTimetables,
+            success: true
+        })                
+    } catch (error) {
+        res.status(500).json({ 
+            msg: error.message ,
+            success: false
+        }); 
+    }
+},
 }
 module.exports = timetableController;
