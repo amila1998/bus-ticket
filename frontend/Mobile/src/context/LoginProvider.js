@@ -8,6 +8,7 @@ const LoginProvider = ({ children }) => {
   const [token, setToken] = useState(false);
   console.log("🚀 ~ file: LoginProvider.js ~ line 7 ~ LoginProvider ~ isLoggedIn", isLoggedIn)
   const [profile, setProfile] = useState({});
+  console.log("🚀 ~ file: LoginProvider.js ~ line 11 ~ LoginProvider ~ profile", profile)
 
  useEffect(() => {
    const getUserDetails=async()=>{

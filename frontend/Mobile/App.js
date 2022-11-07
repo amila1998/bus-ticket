@@ -16,9 +16,9 @@ export default function App() {
     <LoginProvider>
       <NavigationContainer>
        {/* <Main/> */}
-       {
-          !isLoggin ? <RootStackScreensRoute /> : <MainTabScreenRoute />
-        }
+       
+          <RootStackScreensRoute />
+        
       </NavigationContainer>
     </LoginProvider>
   );
