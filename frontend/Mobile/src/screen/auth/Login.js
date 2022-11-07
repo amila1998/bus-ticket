@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
 import { useLogin } from '../../context/LoginProvider'
@@ -19,12 +19,14 @@ const Login = () => {
     const loginHandler = async(e) => {
         e.preventDefault()
         try {
-            const res = await client.post('/api/auth/login', {email, password:Password});
+            const res = await client.post('/api/auth/signin', {email, password:Password});
             console.log("🚀 ~ file: Login.js ~ line 23 ~ loginHandler ~ res", res)
             setIsLoggedIn(true);
             setToken(res.data.token);
+            Navigator.navigate('Main')
         } catch (error) {
             console.log("🚀 ~ file: Login.js ~ line 20 ~ loginHandler ~ error", error)
+            Alert.alert(error.response.data.msg,)
         }
 
     }

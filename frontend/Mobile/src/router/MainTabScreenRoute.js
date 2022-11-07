@@ -79,7 +79,7 @@ const HomeStackScreen = ({navigation}) => (
             fontWeight: 'bold'
             }
         }}>
-            <HomeStack.Screen name="Home" component={Home}  options={{
+            <HomeStack.Screen name="Home2" component={Home}  options={{
         title:'Home',
         headerLeft: () => (
             <Icon.Button name="ios-menu" size={25} backgroundColor="#8a47fd" onPress={() => navigation.dispatch(DrawerActions.openDrawer())}></Icon.Button>
