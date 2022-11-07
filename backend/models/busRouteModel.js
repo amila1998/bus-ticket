@@ -2,7 +2,6 @@ const { Schema, model } = require("mongoose");
 
 const busRouteSchema = new Schema(
     {
-
         routeNumber: {
             type: String,
             unique: true

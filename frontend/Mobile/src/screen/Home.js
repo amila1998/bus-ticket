@@ -32,6 +32,13 @@ const Home = () => {
 
     }, [])
 
+    const handleView =()=>{
+        Navigator.navigate('ViewSearchedRoutes',{
+            startLocation,
+            endLocation
+        })
+    }
+
     return (
         <SafeAreaView style={styles.mainContainer}>
             <ScrollView>
@@ -46,13 +53,13 @@ const Home = () => {
                                 <Text style={styles.title}>Find Availble Buses</Text>
                             </View>
                             <View style={styles.formInput}>
-                                <TextInput style={styles.textInput} placeholder='Start Location'></TextInput>
+                                <TextInput onChangeText={setStartLocation} style={styles.textInput} placeholder='Start Location'></TextInput>
                             </View>
                             <View style={styles.formInput}>
-                                <TextInput style={styles.textInput} placeholder='Destination Location'></TextInput>
+                                <TextInput onChangeText={setEndLocation}  style={styles.textInput} placeholder='Destination Location'></TextInput>
                             </View>
                             <View style={styles.formInput}>
-                                <TouchableOpacity style={styles.defaultButton}>
+                                <TouchableOpacity onPress={handleView} style={styles.defaultButton}>
                                     <Text style={{ textAlign: 'center', fontSize: 16, color: '#fff' }}>View</Text>
                                 </TouchableOpacity>
                             </View>
