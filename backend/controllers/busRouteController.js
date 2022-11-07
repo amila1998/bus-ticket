@@ -3,7 +3,7 @@ const BusRoute = require("../models/busRouteModel");
 const busRouteController = {
     addBusRoute: async (req, res) => {
         try {
-            const { routeNumber, strtlocation, desLocation } = req.body;
+            const { routeNumber, strtlocation, desLocation,buses,stops } = req.body;
 
             // check fields
             if (!routeNumber || !strtlocation || !desLocation)
@@ -21,7 +21,9 @@ const busRouteController = {
             const newBusRoute = new BusRoute({
                 routeNumber,
                 strtlocation,
-                desLocation
+                desLocation,
+                buses,
+                stops
             });
 
             await newBusRoute.save();

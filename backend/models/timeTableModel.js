@@ -7,13 +7,9 @@ const timeTableSchema = new Schema (
         type: String,
         required: true,
     },
-    StartLocation:{
-        type: String,
-        required: true,
-    },
-    DestinationLocation:{
-        type: String,
-        required: true,
+    Navigation :{
+        type: Boolean ,
+        required: true
     },
     StartingTime:{
         type: String,
@@ -23,10 +19,8 @@ const timeTableSchema = new Schema (
         type: String,
         required: true,
     },
-    BusRegistrationNo:{
-        type: String,
-        required: true,
-    },
+    routeNo: String,
+    busID: String,
 }
 );
 

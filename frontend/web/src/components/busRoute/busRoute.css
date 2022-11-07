@@ -71,3 +71,35 @@
     background-color: var(--purple);
     color: white;
   }
+
+.busStops {
+  color: var(--white);
+  background-color: var(--gray);
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-right: 10px;
+  width :fit-content;
+  height: 35px;
+} 
+
+.busStopFlex {
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+}
+
+.busStopFlexInside {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  padding: 6px;
+  background-color: var(--gray);
+}
+
+.busStopSpan {
+  cursor: pointer;
+}
+
+.busStopSpan :hover {
+  color : red;
+}
