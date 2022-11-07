@@ -31,6 +31,13 @@ function BusRoute() {
         setOpen(false);
     }
 
+    // let allbuses = [];
+    // for(const b of busRoutes.buses){
+    //   for(const v of l.value){
+    //     allbuses.push(v)
+    //   }
+    // }
+
     useEffect(() => {
         if (callback) {
             const getAllBusRoutes = async () => {
@@ -99,7 +106,9 @@ function BusRoute() {
                     <thead>
                         <tr className='fw-bold ms-3'>
                             <th style={{ width: "300px" }}>Route Number</th>
+                            <th style={{ width: "400px" }}>Buses</th>
                             <th style={{ width: "400px" }}>Start Location</th>
+                            <th style={{ width: "400px" }}>Destination Location</th>
                             <th style={{ width: "400px" }}>Destination Location</th>
                             <th style={{ width: "450px" }}>Action</th>
                         </tr>
@@ -109,6 +118,7 @@ function BusRoute() {
                     <tbody>
                         {busRoutes.map(busRoute => (
                             <tr key={busRoute._id}>
+                                <td>{busRoute.routeNumber}</td>
                                 <td>{busRoute.routeNumber}</td>
                                 <td>{busRoute.strtlocation}</td>
                                 <td>{busRoute.desLocation}</td>

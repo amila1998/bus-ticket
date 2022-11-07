@@ -4,10 +4,10 @@ const timetableController = {
 
     addTimetable: async(req,res) =>{
         try {
-            const {TimeTableID,StartLocation,DestinationLocation,StartingTime,EndTime,BusRegistrationNo} = req.body;
+            const {TimeTableID , routeNo , Navigation ,StartingTime , EndTime ,busID} = req.body;
 
             const newTimetable = new TimeTable({
-                TimeTableID,StartLocation,DestinationLocation,StartingTime,EndTime,BusRegistrationNo
+                TimeTableID , routeNo , Navigation ,StartingTime,EndTime,busID
             })
             const submitNew = await newTimetable.save();
             res.status(200).json({
@@ -25,10 +25,10 @@ const timetableController = {
 editTimetable: async(req, res) => {
     try {
         let TID = req.params.id;
-        const {StartLocation,DestinationLocation,StartingTime,EndTime,BusRegistrationNo} = req.body;
+        const {TimeTableID , routeNo , Navigation ,StartingTime , EndTime ,busID} = req.body;
 
         const neweditTimetable = {
-            StartLocation,DestinationLocation,StartingTime,EndTime,BusRegistrationNo
+            TimeTableID , routeNo , Navigation ,StartingTime,EndTime,busID
         };
 
         const fetch = await TimeTable.findByIdAndUpdate(TID, neweditTimetable)

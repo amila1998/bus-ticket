@@ -23,7 +23,7 @@ const busSchema = new Schema(
         busNumber:{
             type:String,
             required:true,
-        
+            unique: true
         }
     },
 { timestamps: true }

@@ -5,6 +5,15 @@ const busController = {
             const {chassieNo,noOfSeat,type,condition,busNumber} = req.body;
             // console.log("🚀 ~ file: BusController.js ~ line 6 ~ addBus:async ~ busNumber", busNumber)
             // let date_ob = new Date();
+
+            // check bus 
+            const exBus = await Bus.findOne({ busNumber });
+            if (exBus)
+                return res
+                    .status(400)
+                    .json({ message: "This Bus is already Registered in our system." });
+
+        
             const newBus = new Bus({
                 chassieNo,noOfSeat,type,condition,busNumber
             })

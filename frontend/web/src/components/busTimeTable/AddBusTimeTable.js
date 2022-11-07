@@ -1,38 +1,88 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Select from 'react-select';
 
 const initialState = {
     TimeTableID: "",
-    StartLocation: "",
-    DestinationLocation: "",
+    Navigation : null ,
     StartingTime: "",
     EndTime: "",
-    BusRegistrationNo: ""
 };
 
 function AddBusTimeTable() {
     const [data, setData] = useState(initialState);
-    const { TimeTableID, StartLocation, DestinationLocation, StartingTime, EndTime, BusRegistrationNo } = data;
+    console.log("🚀 ~ file: AddBusTimeTable.js ~ line 17 ~ AddBusTimeTable ~ data", data)
+    const [routeNo, setRouteNo] = useState([]);
+    const [routeNo2, setRouteNo2] = useState([]);
+    const { TimeTableID , Navigation ,  StartingTime, EndTime } = data;
     const navigate = useNavigate();
+    const [routeBuses, setRouteBuses] = useState([])
+    const [busID, setBusID] = useState({})
+    // const [Navigation, setNavigation] = useState("True");
+    let routeNoArray = [];
+    const allRouteNos = [];
+
+    for (const rn2 of routeNo2) {
+        allRouteNos.push(rn2.routeNumber);
+    }
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
 
+    // const onChangeValue = (e) => {
+    //     setNavigation(e.target.value);
+    //     console.log(e.target.value);
+    //   }
+    
+
+    useEffect(() => {
+        const getAllBusRoutes = async () => {
+            try {
+                const res = await axios.get("/api/getAllBusRoutes");
+                setRouteNo2(res.data.fetch);
+            } catch (error) {
+                console.log(error)
+            }
+        };
+        getAllBusRoutes();
+    }, []);
+
+    for (const r of allRouteNos) {
+        routeNoArray.push({ value: r, label: r })
+    }
+
+
+    const handleRouteNoChange = (selectedOption) => {
+        console.log(selectedOption);
+        setRouteNo(selectedOption.value)
+        if (selectedOption.value != '') {
+            let arr = []
+            for (const r of routeNo2) {
+                if (selectedOption.value === r.routeNumber) {
+                    for (const b of r.buses) {
+                        arr.push({ value: b, label: b })
+                    }
+                }
+            }
+            setRouteBuses(arr)
+        }
+    }
+
     const addBusTimeTableHandler = async (e) => {
         e.preventDefault();
         // check fields
-        if (!TimeTableID || !StartLocation || !DestinationLocation || !StartingTime || !EndTime || !BusRegistrationNo) {
+        if (!TimeTableID || !routeNo || !Navigation || !StartingTime || !EndTime || !busID) {
             return toast("Please fill in all fields.", {
                 className: "toast-failed",
                 bodyClassName: "toast-failed",
             });
         } else {
             try {
-                const res = await axios.post("/api/timetable/add", { TimeTableID, StartLocation, DestinationLocation, StartingTime, EndTime, BusRegistrationNo });
+                const res = await axios.post("/api/timetable/add", { TimeTableID, routeNo, Navigation, StartingTime, EndTime, busID: busID.value });
                 toast.success(res.data.msg, {
 
                     position: "top-right",
@@ -64,6 +114,7 @@ function AddBusTimeTable() {
         navigate('/busTimeTable')
     }
 
+
     return (
         <div className="layout">
             <ToastContainer />
@@ -78,13 +129,22 @@ function AddBusTimeTable() {
                         </div>
                         <div className="row">
                             <div class="col-1"></div>
-                            <div class="col-4"><label className="label">Start Location</label></div>
-                            <div class="col-6"><input className="inputs" type="city" name="StartLocation" required onChange={handleChange} placeholder='Enter Start Location' /><br /><br /></div>
+                            <div class="col-4"><label className="label">Bus Route Number</label></div>
+                            <div class="col-6"><Select
+                                name="routeNo"
+                                options={routeNoArray}
+                                className="basic-multi-select inputs"
+                                classNamePrefix="select"
+                                onChange={handleRouteNoChange}
+                            /><br /></div>
                         </div>
                         <div className="row">
                             <div class="col-1"></div>
-                            <div class="col-4"><label className="label">Destination Location</label></div>
-                            <div class="col-6"><input className="inputs" type="city" name="DestinationLocation" required onChange={handleChange} placeholder='Enter Destination Location' /><br /><br /></div>
+                            <div class="col-4"><label className="label">Navigation</label></div>
+                            <div class="col-6"><div className='row' onChange={handleChange}>
+                                <div className='col-5'><input className="radioButton ms-3 me-3" type="radio" name="Navigation" required value={true} /><label className="label" >Up</label></div>
+                                <div className='col-4'><input className="radioButton ms-3 me-3" type="radio" name="Navigation" required value={false}/><label className="label" >Down</label></div>
+                            </div><br /></div>
                         </div>
                         <div className="row">
                             <div class="col-1"></div>
@@ -109,7 +169,16 @@ function AddBusTimeTable() {
                         <div className="row">
                             <div class="col-1"></div>
                             <div class="col-4"><label className="label">Bus Registration Number</label></div>
-                            <div class="col-6"><input className="inputs" type="text" name="BusRegistrationNo" required onChange={handleChange} placeholder='Enter Bus Registration Number' /><br /><br /></div>
+                            <div class="col-6">
+                                <Select
+                                    className='inputs'
+                                    onChange={setBusID}
+                                    options={routeBuses}
+                                    placeholder={'Select a Bus'}
+                                />
+
+
+                                <br /><br /></div>
                         </div>
 
                     </div>
