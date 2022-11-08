@@ -39,7 +39,7 @@ const Login = () => {
                     </View>
                     <View style={styles.loginBody}>
                         <View style={styles.formInput}>
-                            <TextInput onChangeText={setEmail} style={styles.textInput} placeholder='Email'></TextInput>
+                            <TextInput keyboardType='email-address' onChangeText={setEmail} style={styles.textInput} placeholder='Email'></TextInput>
                         </View>
                         <View style={styles.formInput}>
                             <TextInput onChangeText={setPasword} style={styles.textInput} placeholder='Password' secureTextEntry={true}></TextInput>

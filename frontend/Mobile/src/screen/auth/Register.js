@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, View, Text, Image, TextInput, Button, TouchableOpacity } from "react-native";
-
+import { useNavigation } from '@react-navigation/native'
 const Register = () => {
-    const [number, onChangeNumber] = React.useState(null);
+    const [number, onChangeNumber] =useState(null);
+    const [selected, setSelected] =useState();
+    const Navigator = useNavigation();
+    const Local=()=>{
+        setSelected("Local")
+    }
+    const Foreign=()=>{
+        setSelected("Foreign")
+    }
+    const navigateLogin = () => {
+        Navigator.navigate('Login')
+    }
+
+
     return (
         <SafeAreaView style={{ flex: 1 ,backgroundColor:'#8cacf7'}}>
             <ScrollView>
@@ -12,7 +25,7 @@ const Register = () => {
                 <View style={styles.container}>
                     <Text style={styles.myTitle}>Passenger Register</Text>
                 </View>
-                <View style={{ margin: 20, backgroundColor: '#f2f2f2', borderRadius: 5, }}>
+                <View style={{ margin: 20, backgroundColor:'rgba(255, 255, 255, 0.5)', borderRadius: 10, }}>
                     <View style={[styles.containerFlex, {
                         // Try setting `flexDirection` to `"row"`.
                         flexDirection: "row"
@@ -57,9 +70,50 @@ const Register = () => {
                             <Text style={styles.myText}>Account type</Text>
                         </View>
                         <View style={styles.rightFlex} >
-                            <Text style={styles.myText}>Namefild</Text>
+                        <TouchableOpacity onPress={Local} >
+                            <Text style={styles.myText}>Local</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={Foreign}>
+                            <Text style={styles.myText}>Foreign</Text>
+                        </TouchableOpacity>   
                         </View>
                     </View>
+                    { selected=="Local" &&
+                        <View style={[styles.containerFlex, {
+                        // Try setting `flexDirection` to `"row"`.
+                        flexDirection: "row"
+                    }]}>
+                        <View style={styles.leftFlex} >
+                            <Text style={styles.myText}>NIC Number</Text>
+                        </View>
+                        <View style={styles.rightFlex} >
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={onChangeNumber}
+                                placeholder="NIC Number"
+
+                            />
+                        </View>
+                    </View>
+                    }
+                    { selected=="Foreign" &&
+                        <View style={[styles.containerFlex, {
+                        // Try setting `flexDirection` to `"row"`.
+                        flexDirection: "row"
+                    }]}>
+                        <View style={styles.leftFlex} >
+                            <Text style={styles.myText}>Passport Number</Text>
+                        </View>
+                        <View style={styles.rightFlex} >
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={onChangeNumber}
+                                placeholder="Passport Number"
+
+                            />
+                        </View>
+                    </View>
+                    }
                     <View style={[styles.containerFlex, {
                         // Try setting `flexDirection` to `"row"`.
                         flexDirection: "row"
@@ -110,17 +164,16 @@ const Register = () => {
                             />
                         </View>
                     </View>
-                    <View style={{ margin: 20, backgroundColor: '#e6e6e6', borderRadius: 5, }}>
+                    <View style={{ margin: 20, backgroundColor: '#ed11b2', borderRadius: 5, }}>
                         <Button
                             title="Sign up"
-                            color="#c920b3"
+                            color="#ed11b2"
                             borderRadius=''
-
-                        // onPress=''
+                            onPress={navigateLogin}
                         />
                     </View>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={navigateLogin}>
                     <Text style={{ fontSize: 15, textAlign: 'center' }}>Sign In</Text>
                 </TouchableOpacity>
             </ScrollView>

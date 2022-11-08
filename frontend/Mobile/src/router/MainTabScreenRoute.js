@@ -12,6 +12,7 @@ import Home from '../screen/Home';
 import BusTimeTables from '../screen/busTimeTables/BusTimeTables';
 import ViewSearchedRoutes from '../screen/ViewSearchedRoutes/ViewSearchedRoutes';
 import Book from '../screen/Book_a_Bus/Book';
+import QrCode from '../screen/qrCode/QrCode';
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
@@ -21,6 +22,7 @@ import Book from '../screen/Book_a_Bus/Book';
 // import ProfileScreen from './ProfileScreen';
 
 const HomeStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
@@ -45,7 +47,7 @@ const MainTabScreen = () => (
     />
     <Tab.Screen
       name="Profile"
-      component={Profile}
+      component={ProfileStackScreen}
       options={{
         tabBarLabel: 'Profile',
         tabBarColor: '#8a47fd',
@@ -81,6 +83,7 @@ const HomeStackScreen = ({ navigation }) => (
       fontWeight: 'bold'
     }
   }}>
+    
     <HomeStack.Screen name="Home2" component={Home} options={{
       title: 'Home',
       headerLeft: () => (
@@ -96,10 +99,41 @@ const HomeStackScreen = ({ navigation }) => (
       headerShown: true,
     }} />
       <HomeStack.Screen name="Book" component={Book} options={{
-      title: 'Book a Bus',
+      title: 'Book',
       headerShown: true,
     }} />
   </HomeStack.Navigator>
+);
+const ProfileStackScreen = ({ navigation }) => (
+  <ProfileStack.Navigator screenOptions={{
+    headerStyle: {
+      backgroundColor: '#8a47fd',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    
+    <ProfileStack.Screen name="Profile2" component={Profile} options={{
+      title: 'Profile',
+      headerLeft: () => (
+        <Icon.Button name="ios-menu" size={25} backgroundColor="#8a47fd" onPress={() => navigation.dispatch(DrawerActions.openDrawer())}></Icon.Button>
+      )
+    }} />
+    <ProfileStack.Screen name="QrCode" component={QrCode} options={{
+      title: 'Your QR Code',
+      headerShown: true,
+    }} />
+     {/* <ProfileStack.Screen name="ViewSearchedRoutes" component={ViewSearchedRoutes} options={{
+      title: 'Bus Time Tables',
+      headerShown: true,
+    }} />
+      <ProfileStack.Screen name="Book" component={Book} options={{
+      title: 'Book a Bus',
+      headerShown: true,
+    }} /> */}
+  </ProfileStack.Navigator>
 );
 
 export default MainTabScreen;
