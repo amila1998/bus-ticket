@@ -1,4 +1,6 @@
 const TimeTable = require("../models/timeTableModel")
+const Bus = require("../models/busModel")
+const BusRoute = require("../models/busRouteModel")
 
 const timetableController = {
 
@@ -92,5 +94,22 @@ getOne:async(req,res)=>{
         }); 
     }
 },
+getDetailsForBusBook:async(req,res)=> {
+    try {
+        let TimetableId = req.params.id ;
+        const OneTimetables = await TimeTable.findOne({"_id":TimetableId});
+        const busDetails = await Bus.findOne({'busNumber':OneTimetables.busID})
+        const busRouteDetails = await BusRoute.findOne({'routeNumber':OneTimetables.routeNo})
+        res.status(200).json(
+            {OneTimetables,busDetails,busRouteDetails}
+            
+        )                
+    } catch (error) {
+        res.status(500).json({ 
+            msg: error.message ,
+            success: false
+        }); 
+    }
+}
 }
 module.exports = timetableController;

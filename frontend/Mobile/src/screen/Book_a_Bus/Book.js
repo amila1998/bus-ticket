@@ -4,14 +4,22 @@ import client from '../../api/client';
 
 const Book = ({ route }) => {
   const { data } = route.params;
-  const [details, setDetails] = useState('')
-  console.log("🚀 ~ file: Book.js ~ line 9 ~ Book ~ details", details)
+  console.log("🚀 ~ file: Book.js ~ line 7 ~ Book ~ data", data)
+  const [OneTimetables, setOneTimetables] = useState('')
+  const [busRouteDetails, setbusRouteDetails] = useState('')
+  const [busDetails, setbusDetails] = useState('')
+  console.log("🚀 ~ file: Book.js ~ line 11 ~ Book ~ busDetails", busDetails)
+  console.log("🚀 ~ file: Book.js ~ line 10 ~ Book ~ busRouteDetails", busRouteDetails)
+  console.log("🚀 ~ file: Book.js ~ line 9 ~ Book ~ OneTimetables", OneTimetables)
+
 
   useEffect(() => {
     const getDetails = async () => {
       try {
         const res = await client.get(`/api/getDetailsForBusBook/${data}`)
-        setDetails(res.data)
+        setOneTimetables(res.data.OneTimetables)
+        setbusRouteDetails(res.data.busRouteDetails)
+        setbusDetails(res.data.busDetails)
       } catch (error) {
         console.log("🚀 ~ file: Book.js ~ line 13 ~ useEffect ~ error", error)
 
@@ -30,12 +38,32 @@ const Book = ({ route }) => {
               <View style={styles.row}>
                 <Text style={styles.txt}>Time Table ID</Text>
                 <Text style={styles.txt}>:</Text>
-                <Text style={styles.txt2}>BT001</Text>
+                <Text style={styles.txt2}>{OneTimetables?.TimeTableID}</Text>
               </View>
               <View style={styles.row}>
-                <Text style={styles.txt}>Time Table ID</Text>
+                <Text style={styles.txt}>Start Location</Text>
                 <Text style={styles.txt}>:</Text>
-                <Text style={styles.txt2}>BT001</Text>
+                <Text style={styles.txt2}>{OneTimetables?.Navigation===true?busRouteDetails?.strtlocation:busRouteDetails?.desLocation}</Text>
+              </View>
+              <View style={styles.row}>
+                <Text style={styles.txt}>Destination Location</Text>
+                <Text style={styles.txt}>:</Text>
+                <Text style={styles.txt2}>{OneTimetables?.Navigation?busRouteDetails?.desLocation:busRouteDetails?.strtlocation }</Text>
+              </View>
+              <View style={styles.row}>
+                <Text style={styles.txt}>Start Time</Text>
+                <Text style={styles.txt}>:</Text>
+                <Text style={styles.txt2}>{OneTimetables?.StartingTime}</Text>
+              </View>
+              <View style={styles.row}>
+                <Text style={styles.txt}>End Time</Text>
+                <Text style={styles.txt}>:</Text>
+                <Text style={styles.txt2}>{OneTimetables?.EndTime}</Text>
+              </View>
+              <View style={styles.row}>
+                <Text style={styles.txt}>Bus Registration Number</Text>
+                <Text style={styles.txt}>:</Text>
+                <Text style={styles.txt2}>{busDetails?.busNumber}</Text>
               </View>
             </View>
           </View>
