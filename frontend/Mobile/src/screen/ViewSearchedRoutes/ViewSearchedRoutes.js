@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import client from '../../api/client';
+import { useNavigation } from '@react-navigation/native';
 
 const ViewSearchedRoutes = ({ route }) => {
   const { startLocation, endLocation } = route.params;
@@ -10,7 +11,7 @@ const ViewSearchedRoutes = ({ route }) => {
   const [allTimeTables, setAllTimeTables] = useState([])
   // console.log("🚀 ~ file: ViewSearchedRoutes.js ~ line 10 ~ ViewSearchedRoutes ~ allTimeTables", allTimeTables)
   const [callBack, setCallback] = useState(false)
-
+  const Navigator = useNavigation();
 
   useEffect(() => {
     const getAllBusShedules = async () => {
@@ -68,7 +69,7 @@ const ViewSearchedRoutes = ({ route }) => {
     BusNo = d.busID
     StartTime = d.StartingTime
     EndTime = d.EndTime
-    empt = ''
+    empt = d._id
     const dd = [
       RouteNo,
       BusNo,
@@ -86,7 +87,10 @@ const ViewSearchedRoutes = ({ route }) => {
 
   const element = (data, index) => (
     <TouchableOpacity onPress={() => {
-      console.log(data);
+      console.log(data[4]);
+      Navigator.navigate("Book",{
+        data:data[4]
+      })
     }}>
       <View style={styles.btn}>
         <Text style={styles.btnText}>Book</Text>
