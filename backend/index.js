@@ -51,6 +51,8 @@ app.use(tokenRoutes);
 const busesRoutes = require("./routes/busRoute");
 app.use(busesRoutes);
 
+const bookRoutes = require("./routes/bookRoute");
+app.use(bookRoutes);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
