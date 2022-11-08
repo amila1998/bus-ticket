@@ -6,7 +6,7 @@ const busRouteController = {
             const { routeNumber, strtlocation, desLocation,buses,stops } = req.body;
 
             // check fields
-            if (!routeNumber || !strtlocation || !desLocation)
+            if (!routeNumber || !strtlocation || !desLocation || !buses || !stops)
                 return res
                     .status(400)
                     .json({ message: "Please fill in all fields." });
@@ -101,12 +101,14 @@ const busRouteController = {
         try {
 
             let busRouteId = req.params.id ;
-            const { routeNumber, strtlocation, desLocation  } = req.body;
+            const { routeNumber, strtlocation, desLocation , buses , stops } = req.body;
 
             const newEditBusRoute = {
                 routeNumber,
                 strtlocation,
-                desLocation
+                desLocation, 
+                buses, 
+                stops
             };
 
             await BusRoute.findByIdAndUpdate(busRouteId, newEditBusRoute);

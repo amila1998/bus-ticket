@@ -103,10 +103,10 @@ const BusTimeTable = () => {
         <table id="bus-time-table" className="fs-5 m-auto">
           <tr className="fw-bold ms-3">
             <th>Timetable ID</th>
-            <th>Start Location</th>
-            <th>Destination Location</th>
+            <th>Route Number</th>
             <th>Starting Time</th>
             <th>Ending Time</th>
+            <th>Navigation</th>
             <th>Bus Registration No</th>
             <th>Action </th>
           </tr>
@@ -114,11 +114,12 @@ const BusTimeTable = () => {
           {timeTables.map((lb) => (
             <tr key={lb._id}>
               <td>{lb.TimeTableID}</td>
-              <td>{lb.StartLocation}</td>
-              <td>{lb.DestinationLocation}</td>
+              <td>{lb.routeNo}</td>
               <td>{lb.StartingTime}</td>
               <td>{lb.EndTime}</td>
-              <td>{lb.BusRegistrationNo}</td>
+              <td>{lb.Navigation ? <div>Up</div> : <div>Down</div>}
+                  </td>
+              <td>{lb.busID}</td>
               <td>
                 {" "}
                 <div className="labelBtnEdit">

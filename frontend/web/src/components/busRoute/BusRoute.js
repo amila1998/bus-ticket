@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import close from "../../assets/close.png";
+
 import './busRoute.css'
 
 const style = {
@@ -27,16 +28,10 @@ function BusRoute() {
     const [callback, setCallback] = useState(true);
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
+    const [deleteID, setDeleteID] = useState("");
     const handleClose = () => {
         setOpen(false);
     }
-
-    // let allbuses = [];
-    // for(const b of busRoutes.buses){
-    //   for(const v of l.value){
-    //     allbuses.push(v)
-    //   }
-    // }
 
     useEffect(() => {
         if (callback) {
@@ -105,25 +100,38 @@ function BusRoute() {
                 <table id="customers" className='fs-5 m-auto'>
                     <thead>
                         <tr className='fw-bold ms-3'>
-                            <th style={{ width: "300px" }}>Route Number</th>
-                            <th style={{ width: "400px" }}>Buses</th>
-                            <th style={{ width: "400px" }}>Start Location</th>
-                            <th style={{ width: "400px" }}>Destination Location</th>
-                            <th style={{ width: "400px" }}>Destination Location</th>
-                            <th style={{ width: "450px" }}>Action</th>
+                            <th >Route Number</th>
+                            <th >Buses</th>
+                            <th >Start Location</th>
+                            <th >Destination Location</th>
+                            <th >Bus Stops</th>
+                            <th >Action</th>
                         </tr>
                     </thead>
-
 
                     <tbody>
                         {busRoutes.map(busRoute => (
                             <tr key={busRoute._id}>
                                 <td>{busRoute.routeNumber}</td>
-                                <td>{busRoute.routeNumber}</td>
+                                <td>{
+                                    busRoute.buses.map(b => {
+                                        return <div key={b} lable={b}>{b} </div>
+                                    })
+                                }
+                                </td>
                                 <td>{busRoute.strtlocation}</td>
                                 <td>{busRoute.desLocation}</td>
+                                <td>{
+                                    busRoute.stops.map(b => {
+                                        return <div key={b} lable={b}>{b} </div>
+                                    })
+                                }
+                                </td>
                                 <td><center><button className='editBtn' onClick={() => editBusRoute(busRoute._id)}>Edit</button>
-                                    <button className='deleteBtn' onClick={handleOpen} >Delete</button></center>
+                                    <button className='deleteBtn' onClick={() => {
+                                        handleOpen();
+                                        setDeleteID(busRoute._id);
+                                    }} >Delete</button></center>
                                     <Modal
                                         open={open}
                                         onClose={handleClose}
@@ -146,8 +154,9 @@ function BusRoute() {
                                             <div>
                                                 <div>
                                                     <center>
-                                                        <button className='editBtn' onClick={handleCancel}>Cancel</button>
-                                                        <button className='deleteBtn' onClick={() => deleteBusRoute(busRoute._id)}>Delete</button>
+                                                        <button className='editBtn me-4' onClick={handleCancel}>Cancel</button>
+                                                        
+                                                        <button className='deleteBtn ms-4' onClick={() => deleteBusRoute(deleteID)}>Delete</button>
                                                     </center>
 
                                                 </div>
