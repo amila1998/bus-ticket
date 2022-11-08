@@ -14,7 +14,13 @@ const busRouteSchema = new Schema(
             type:String,
             required:true
         
-        }
+        },
+        buses:[{
+            type:String
+        }],
+        stops:[{
+            type:String
+        }]
     },
 { timestamps: true }
 
