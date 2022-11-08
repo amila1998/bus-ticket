@@ -10,6 +10,15 @@ const TransportManagerHome = () => {
     const handleTokenmanagement = () => {
         navigate('/tokenmanagement');
     }
+
+    const handleBusRouteManagement = () => {
+        navigate('/busRoute');
+    }
+
+    const handleBusTimeTableManagement = () => {
+        navigate('/busTimeTable');
+    }
+
     return (
         <div className='adminDashboard'>
             <div className='title'>
@@ -22,6 +31,9 @@ const TransportManagerHome = () => {
 
                     <button onClick={handleUserManagement} className='btn btn-outline-primary'>User Management</button><br />
                     <button onClick={handleTokenmanagement} className='btn btn-outline-primary'>Token Management</button><br />
+                    <button onClick={handleBusRouteManagement} className='btn btn-outline-primary'>Bus Route Management</button><br />
+                    <button onClick={handleBusTimeTableManagement} className='btn btn-outline-primary'>Bus Time Table Management</button><br />
+                    <br/>
                 </div>
             </div>
         </div>

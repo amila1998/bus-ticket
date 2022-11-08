@@ -13,9 +13,6 @@ const AdminHome = () => {
     navigate('/tokenmanagement');
   }
 
-  const handleBusRouteManagement = () => {
-    navigate('/busRoute');
-  }
 
   return (
     <div className='adminDashboard'>
@@ -29,7 +26,6 @@ const AdminHome = () => {
 
           <button onClick={handleUserManagement} className='btn btn-outline-primary'>User Management</button><br />
           <button onClick={handleTokenmanagement} className='btn btn-outline-primary'>Token Management</button><br />
-          <button onClick={handleBusRouteManagement} className='btn btn-outline-primary'>Bus Route Management</button><br />
 
           <br />
         </div>

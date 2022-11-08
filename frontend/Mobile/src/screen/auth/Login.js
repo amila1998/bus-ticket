@@ -1,14 +1,34 @@
 import React, { useState } from 'react'
-import { Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import axios from 'axios'
+import { useLogin } from '../../context/LoginProvider'
+import client from '../../api/client'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [Password, setPasword] = useState('')
     const Navigator = useNavigation();
+    const { setIsLoggedIn, setToken } = useLogin();
 
     const navigateRegister = () => {
         Navigator.navigate('Register')
+    }
+
+
+    const loginHandler = async(e) => {
+        e.preventDefault()
+        try {
+            const res = await client.post('/api/auth/signin', {email, password:Password});
+            console.log("🚀 ~ file: Login.js ~ line 23 ~ loginHandler ~ res", res)
+            setIsLoggedIn(true);
+            setToken(res.data.token);
+            Navigator.navigate('Main')
+        } catch (error) {
+            console.log("🚀 ~ file: Login.js ~ line 20 ~ loginHandler ~ error", error)
+            Alert.alert(error.response.data.msg,)
+        }
+
     }
     return (
         <SafeAreaView style={styles.mainContainer}>
@@ -25,7 +45,7 @@ const Login = () => {
                             <TextInput onChangeText={setPasword} style={styles.textInput} placeholder='Password' secureTextEntry={true}></TextInput>
                         </View>
                         <View style={styles.formInput}>
-                            <TouchableOpacity style={styles.defaultButton}>
+                            <TouchableOpacity onPress={loginHandler} style={styles.defaultButton}>
                                 <Text style={{ textAlign: 'center', fontSize: 16, color: '#fff' }}>Login</Text>
                             </TouchableOpacity>
                         </View>
@@ -80,7 +100,7 @@ const styles = StyleSheet.create({
     },
     defaultButton: {
         padding: 15,
-        backgroundColor: '#FF6D27',
+        backgroundColor: '#fd307b',
         borderRadius: 50,
     },
 

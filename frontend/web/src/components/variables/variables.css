@@ -3,7 +3,7 @@
     --pink: #fd307b;
     --purple:#8a47fd;
     --slide: rgb(207,208,238);
-    --slideB: rgb(184,187,232);
+    --slideB: #b8bbe8;
     --GradientBG: linear-gradient(to left, var(--slide), var(--slideB));
     --white: rgb(255, 255, 255);
     --black: black;
@@ -13,7 +13,7 @@
     --boarderColorY: rgb(89, 145, 0);
     --boarderColorHover: rgb(0, 202, 17);
     --red: rgb(216, 0, 0);
-    --btnOrange: rgb(245, 167, 39);
+    --btnOrange: #f5a727;
     --textBorder: rgb(97, 189, 238);
     --btnGreen: rgb(0, 118, 5);
     --btnRed: rgb(221, 0, 0);
