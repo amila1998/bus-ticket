@@ -99,7 +99,7 @@ const HomeStackScreen = ({ navigation }) => (
       headerShown: true,
     }} />
       <HomeStack.Screen name="Book" component={Book} options={{
-      title: 'Book a Bus',
+      title: 'Book',
       headerShown: true,
     }} />
   </HomeStack.Navigator>
