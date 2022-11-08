@@ -14,14 +14,12 @@ const initialState = {
 
 function AddBusTimeTable() {
     const [data, setData] = useState(initialState);
-    console.log("🚀 ~ file: AddBusTimeTable.js ~ line 17 ~ AddBusTimeTable ~ data", data)
     const [routeNo, setRouteNo] = useState([]);
     const [routeNo2, setRouteNo2] = useState([]);
     const { TimeTableID , Navigation ,  StartingTime, EndTime } = data;
     const navigate = useNavigate();
     const [routeBuses, setRouteBuses] = useState([])
     const [busID, setBusID] = useState({})
-    // const [Navigation, setNavigation] = useState("True");
     let routeNoArray = [];
     const allRouteNos = [];
 
@@ -32,12 +30,6 @@ function AddBusTimeTable() {
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value });
     };
-
-    // const onChangeValue = (e) => {
-    //     setNavigation(e.target.value);
-    //     console.log(e.target.value);
-    //   }
-    
 
     useEffect(() => {
         const getAllBusRoutes = async () => {
@@ -51,10 +43,10 @@ function AddBusTimeTable() {
         getAllBusRoutes();
     }, []);
 
+
     for (const r of allRouteNos) {
         routeNoArray.push({ value: r, label: r })
     }
-
 
     const handleRouteNoChange = (selectedOption) => {
         console.log(selectedOption);
