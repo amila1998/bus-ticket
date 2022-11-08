@@ -4,6 +4,7 @@ import client from '../../api/client';
 
 const Book = ({ route }) => {
   const { data } = route.params;
+  console.log("🚀 ~ file: Book.js ~ line 7 ~ Book ~ data", data)
   const [details, setDetails] = useState('')
   console.log("🚀 ~ file: Book.js ~ line 9 ~ Book ~ details", details)
 
