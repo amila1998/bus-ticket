@@ -57,11 +57,13 @@ const styles = StyleSheet.create({
         padding: 15,
         backgroundColor: '#fd307b',
         borderRadius: 50,
+        width:150
     },
     defaultButton2: {
         padding: 15,
         backgroundColor: '#f5a727',
         borderRadius: 50,
+        width:150
     },
 
 

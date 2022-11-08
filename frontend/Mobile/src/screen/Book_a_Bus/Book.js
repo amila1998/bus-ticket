@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import axios from "axios";
+import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View,TouchableOpacity } from 'react-native'
 import client from '../../api/client';
 
 const Book = ({ route }) => {
   const { data } = route.params;
-  console.log("🚀 ~ file: Book.js ~ line 7 ~ Book ~ data", data)
+  const [details, setDetails] = useState('')
+  const [busRouteID, setBusRouteID] = useState("123456")
+  const [noOfPass, setNoOfPass] = useState('')
+  const [totalPrice, setTotalPrice] = useState('')
+  const [bookDate, setBookDate] = useState('')
   const [OneTimetables, setOneTimetables] = useState('')
   const [busRouteDetails, setbusRouteDetails] = useState('')
   const [busDetails, setbusDetails] = useState('')
+  console.log("🚀 ~ file: Book.js ~ line 7 ~ Book ~ data", data)
   console.log("🚀 ~ file: Book.js ~ line 11 ~ Book ~ busDetails", busDetails)
   console.log("🚀 ~ file: Book.js ~ line 10 ~ Book ~ busRouteDetails", busRouteDetails)
   console.log("🚀 ~ file: Book.js ~ line 9 ~ Book ~ OneTimetables", OneTimetables)
@@ -27,6 +33,23 @@ const Book = ({ route }) => {
     }
     getDetails()
   }, [data])
+
+  const addBusDetailsHandler = async (e) => {
+    e.preventDefault();
+    if (noOfPass === "" ||  totalPrice === "" ||  bookDate==="") {
+        alert("Fill all the fields");
+    } else {
+        try {
+            const res = await axios.post("/api/booking",{busRouteID,noOfPass,totalPrice, bookDate});
+            console.log(res)
+            // alert(res.data)
+            // setOpen(false)
+            // window.location.href = '/pharmacist'
+        } catch (err) {
+            console.log(err);
+        }
+    }
+};
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -70,11 +93,19 @@ const Book = ({ route }) => {
           <View>
             <Text style={styles.title}>Fill Booking Details</Text>
             <View style={styles.formInput}>
-              <TextInput keyboardType='number-pad'  style={styles.textInput} placeholder='No of passangers'></TextInput>
+              <TextInput keyboardType='number-pad' type="number"  name="noOfPass" style={styles.textInput} placeholder='No of passangers' onChangeText={setNoOfPass}></TextInput>
             </View>
             <View style={styles.formInput}>
-              <TextInput keyboardType='number-pad'  style={styles.textInput} placeholder='No of passangers'></TextInput>
+              <TextInput   name="totalPrice" style={styles.textInput} placeholder='total price' onChangeText={setTotalPrice}></TextInput>
             </View>
+            <View style={styles.formInput}>
+              <TextInput  name="bookDate"  style={styles.textInput} placeholder='booking date' onChangeText={setBookDate}></TextInput>
+            </View>
+          </View>
+          <View style={styles.formInput}>
+                                <TouchableOpacity  style={styles.defaultButton} onPress={addBusDetailsHandler}>
+                                    <Text style={{ textAlign: 'center', fontSize: 16, color: '#fff' }}>Book Now</Text>
+                                </TouchableOpacity>
           </View>
 
         </View>
