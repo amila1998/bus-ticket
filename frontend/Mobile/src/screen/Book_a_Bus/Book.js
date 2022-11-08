@@ -40,7 +40,7 @@ const Book = ({ route }) => {
         alert("Fill all the fields");
     } else {
         try {
-            const res = await axios.post("/api/booking",{busRouteID,noOfPass,totalPrice, bookDate});
+            const res = await client.post("/api/booking",{busRouteID,noOfPass,totalPrice, bookDate});
             console.log(res)
             // alert(res.data)
             // setOpen(false)
