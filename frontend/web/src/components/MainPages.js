@@ -22,6 +22,8 @@ import AllBusView from './busManagement/AllBusView';
 import AddBus from './busManagement/AddBus';
 import Profile from './Profile/Profile';
 import TransportManagerHome from './TransportManager/TransportManagerHome';
+import BusDeleteModal from './busManagement/BusDeleteModal';
+import EditBus from './busManagement/EditBus';
 
 const MainPages = () => {
   const state = useContext(GlobalState)
@@ -57,6 +59,7 @@ const MainPages = () => {
         
         <Route path='/AllBusView' element={<AllBusView/>}/>
         <Route path='/AddBus' element={<AddBus/>}/>
+        <Route path='/editBus/:id' element={<EditBus/>}/>
 
         </Routes>
   </div>
