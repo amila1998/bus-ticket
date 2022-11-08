@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import React from 'react'
 
-import { StyleSheet, Text, View, Button, SafeAreaView, ScrollView, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, SafeAreaView, ScrollView, TextInput, TouchableOpacity, Image, Alert } from 'react-native';
 import client from '../api/client';
 const Home = () => {
     const [allRoutes, setAllRoutes] = React.useState([])
@@ -33,10 +33,14 @@ const Home = () => {
     }, [])
 
     const handleView =()=>{
-        Navigator.navigate('ViewSearchedRoutes',{
-            startLocation,
-            endLocation
-        })
+        if(!startLocation || !endLocation){
+            Alert.alert('Fill all the feilds')
+        }else{
+            Navigator.navigate('ViewSearchedRoutes',{
+                startLocation,
+                endLocation
+            })
+        }
     }
 
     return (
