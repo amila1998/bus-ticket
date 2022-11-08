@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native'
+import axios from "axios";
+import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View,TouchableOpacity } from 'react-native'
 import client from '../../api/client';
 
 const Book = ({ route }) => {
   const { data } = route.params;
   const [details, setDetails] = useState('')
-  console.log("🚀 ~ file: Book.js ~ line 9 ~ Book ~ details", details)
+  const [noOfPass, setNoOfPass] = useState('')
+  const [totalPrice, setTotalPrice] = useState('')
+  const [bookDate, setBookDate] = useState('')
+ 
 
   useEffect(() => {
     const getDetails = async () => {
@@ -19,6 +23,8 @@ const Book = ({ route }) => {
     }
     getDetails()
   }, [data])
+
+
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -42,11 +48,19 @@ const Book = ({ route }) => {
           <View>
             <Text style={styles.title}>Fill Booking Details</Text>
             <View style={styles.formInput}>
-              <TextInput keyboardType='number-pad'  style={styles.textInput} placeholder='No of passangers'></TextInput>
+              <TextInput keyboardType='number-pad' type="number"  name="noOfPass" style={styles.textInput} placeholder='No of passangers' onChangeText={setNoOfPass}></TextInput>
             </View>
             <View style={styles.formInput}>
-              <TextInput keyboardType='number-pad'  style={styles.textInput} placeholder='No of passangers'></TextInput>
+              <TextInput keyboardType='number-pad' type="number"  name="totalPrice" style={styles.textInput} placeholder='total price' onChangeText={setTotalPrice}></TextInput>
             </View>
+            <View style={styles.formInput}>
+              <TextInput keyboardType='number-pad' name="bookDate"  style={styles.textInput} placeholder='booking date' onChangeText={setBookDate}></TextInput>
+            </View>
+          </View>
+          <View style={styles.formInput}>
+                                <TouchableOpacity  style={styles.defaultButton}>
+                                    <Text style={{ textAlign: 'center', fontSize: 16, color: '#fff' }}>Book Now</Text>
+                                </TouchableOpacity>
           </View>
 
         </View>
